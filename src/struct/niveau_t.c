@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <stdio.h>
 #include "niveau_t.h"
 #include "../constants.h"
 
@@ -42,4 +43,24 @@ char lecture_du_terrain (niveau_t* niveau, int colonne, int ligne){
 	int indice = indice_case_sur_terrain(niveau, colonne, ligne);
 
 	return niveau->terrain[indice];
+}
+
+void initialise_terrain(niveau_t* niveau){
+  int indice;
+  for(int i = 0; i < niveau->colonnes ;i++){
+    for(int y = 0; y < niveau->lignes ; y++){
+      indice = indice_case_sur_terrain(niveau, i, y);
+      niveau->terrain[indice] = TILE_WALL;
+    }
+  }
+}
+
+void affichage_niveau(niveau_t* niveau){
+  int indice;
+  for(int i = 0; i < niveau->colonnes;i++){
+    for(int y = 0; y < niveau->lignes; y++){
+      indice = indice_case_sur_terrain(niveau, i, y);
+      printf("%c",niveau->terrain[indice]);
+    }printf("\n");
+  }
 }

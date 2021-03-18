@@ -19,4 +19,8 @@ int indice_case_sur_terrain (niveau_t* niveau, int colonne, int ligne);
 void place_sur_terrain (niveau_t* niveau, int colonne, int ligne, char car);
 
 // Lis le contenu du terrain aux coordonées spécifiées en paramètre
-char lecture_du_terrain (niveau_t* niveau, int colonne, int ligne); 
+char lecture_du_terrain (niveau_t* niveau, int colonne, int ligne);
+
+void initialise_terrain(niveau_t* niveau);
+
+void affichage_niveau(niveau_t* niveau);
