@@ -1,5 +1,10 @@
+BUILD_DIR=build
+OUTPUT=build/sokoban
+
 CC=gcc
 CFLAGS=-Wall
 
+
 all: src/*.c src/*.h src/struct/*.c src/struct/*.h
-	$(CC) $(CFLAGS) -o compil src/*.c src/struct/*.c
+	mkdir -p $(BUILD_DIR)
+	$(CC) $(CFLAGS) -o $(OUTPUT) src/*.c src/struct/*.c
