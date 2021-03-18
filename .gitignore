@@ -1,0 +1,6 @@
+# .gitignore
+# ----------
+# List of files to exclude from commits automatically
+
+# Ignore build/ directory and subfolders/files
+[Bb]uild/
