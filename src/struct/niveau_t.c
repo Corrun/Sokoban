@@ -57,6 +57,7 @@ void initialise_terrain(niveau_t* niveau){
 
 void affichage_niveau(niveau_t* niveau){
   int indice;
+  printf("\n");
   for(int i = 0; i < niveau->colonnes;i++){
     for(int y = 0; y < niveau->lignes; y++){
       indice = indice_case_sur_terrain(niveau, i, y);
@@ -70,18 +71,56 @@ niveau_t* lecture_du_niveau(int quel_niveau){
   char chemin_du_niveau[100];
   sprintf(chemin_du_niveau,"./niveau/niveau_%d",quel_niveau);
   fichier = fopen(chemin_du_niveau,"r");
-  int i;
-  int y;
-  int idx = 0;
+  int colonne;
+  int ligne;
   char c;
-  fscanf(fichier,"%d %d",&i,&y);
+  fscanf(fichier,"%d %d",&colonne,&ligne);
   //printf(">%d %d<\n", i,y);
-  niveau_t* niveau = nouveau_niveau(i,y);
-  while ((c = fgetc(fichier)) != EOF){
+  niveau_t* niveau = nouveau_niveau(colonne,ligne);
+
+  for(int idx = 0; idx < colonne * ligne ; idx ++){
+    printf("%c",c);
+    if((c = fgetc(fichier))==EOF){
+      break;
+    }else{
+      if(c == ' '){
+	niveau->terrain[idx] = TILE_EMPTY;
+      }else if(c == '#'){
+	niveau->terrain[idx] = TILE_WALL;
+      }else if(c == '$'){
+	niveau->terrain[idx] = TILE_CRATE;
+      }else if(c == '.'){
+	niveau->terrain[idx] = TILE_CRATE_ON_TARGET;
+      }else if(c == '*'){
+	niveau->terrain[idx] = TILE_PLAYER;
+      }else if(c == '+'){
+	niveau->terrain[idx] = TILE_PLAYER_ON_TARGET;
+      }else{
+	niveau->terrain[idx] = TILE_EMPTY;
+      }      
+     }
+  }
+  printf("\n");
+
+
+  /*
+  for(int idx = 0 ; idx < i ; idx++){
+    for(int idz = 0; idz < y ; idz++){
+      c = fgetc(fichier);
+      	printf("%c", c);
+	*(niveau->terrain+i*idx+idz) = c;
+    }
+    }*/
+  
+  /*while ((c = fgetc(fichier)) != EOF){
     *(niveau->terrain+idx) = c;
     idx++;
-  }
+    }*/
   fclose(fichier);
-  
   return niveau;
 }
+
+/*
+int indice_case_sur_terrain (niveau_t* niveau, int colonne, int ligne){
+	return colonne * niveau->lignes + ligne;
+	}*/
