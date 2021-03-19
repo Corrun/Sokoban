@@ -64,3 +64,28 @@ void affichage_niveau(niveau_t* niveau){
     }printf("\n");
   }
 }
+
+niveau_t* lecture_du_niveau(int quel_niveau){
+  niveau_t* a = nouveau_niveau(10,7); 
+  FILE* fichier;
+  char chemin_du_niveau[100];
+  printf("vla le fichier ouvert \n");
+  //sprintf(chemin_du_niveau,"./../../niveau/niveau_%d",quel_niveau);
+  sprintf(chemin_du_niveau,"niveau_%d",quel_niveau);
+  printf("%s\n",chemin_du_niveau);
+  fichier = fopen(chemin_du_niveau,"r");
+
+  if(fichier == NULL){
+    printf("null null le fichier nuull !\n");
+  }
+  
+  char c;
+  printf("On début le parcours de fichier \n");
+  while ((c = fgetc(fichier)) != EOF){
+    printf("%c",c);
+  }
+
+  fclose(fichier);
+  
+  return a;
+}

@@ -24,3 +24,5 @@ char lecture_du_terrain (niveau_t* niveau, int colonne, int ligne);
 void initialise_terrain(niveau_t* niveau);
 
 void affichage_niveau(niveau_t* niveau);
+
+niveau_t* lecture_du_niveau(int quel_niveau);
