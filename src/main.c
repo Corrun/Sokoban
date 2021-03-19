@@ -18,7 +18,6 @@ int main(void){
   
   niveau_t* niv0 = lecture_du_niveau(0);
   
-  free(niv0);
-  //affichage_niveau(niv0);
+  affichage_niveau(niv0);
   return 0;
 }
