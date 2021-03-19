@@ -46,26 +46,42 @@ char lecture_du_terrain (niveau_t* niveau, int colonne, int ligne){
 }
 
 void initialise_terrain(niveau_t* niveau){
+  // On commence par définir une variable indice qui nous servira pour plus tard
   int indice;
-  for(int i = 0; i < niveau->colonnes ;i++){
-    for(int y = 0; y < niveau->lignes ; y++){
+  
+  for(int i = 0; i < niveau->colonnes ;i++){ //On boucle ...
+    for(int y = 0; y < niveau->lignes ; y++){ // ... sur le tableau
+      
+      // On se sert d'une fonction géniale qui permet d'accéder a une case du tableau sans soucis
       indice = indice_case_sur_terrain(niveau, i, y);
+
+      // Et on rempli le terrain de mur ...
       niveau->terrain[indice] = TILE_WALL;
     }
   }
 }
 
 void affichage_niveau(niveau_t* niveau){
+  // On commence par définir une variable indice qui nous servira pour plus tard
   int indice;
+
+  // On fait un retour à la ligne pour être sûr que la dernière fonction utilisée ne nous
+  // ai pas laissée en plein millieu du terminal 
   printf("\n");
-  for(int i = 0; i < niveau->colonnes;i++){
-    for(int y = 0; y < niveau->lignes; y++){
+  
+  for(int i = 0; i < niveau->colonnes;i++){ // On boucle ...
+    for(int y = 0; y < niveau->lignes; y++){ // ... sur le tableau
+
+      // On se sert d'une fonction géniale qui permet d'accéder a une case du tableau sans soucis
       indice = indice_case_sur_terrain(niveau, i, y);
+
+      // On affiche le contenu de la case sur laquelle l'indice pointe
       printf("%c",niveau->terrain[indice]);
-    }printf("\n");
+    }printf("\n"); // Retour à la ligne pour éviter d'avoir un tableau à une dimmension..visuellement...
   }
 }
 
+// Faut débug avant qq même :>
 niveau_t* lecture_du_niveau(int quel_niveau){
   FILE* fichier;
   char chemin_du_niveau[100];
@@ -101,26 +117,6 @@ niveau_t* lecture_du_niveau(int quel_niveau){
      }
   }
   printf("\n");
-
-
-  /*
-  for(int idx = 0 ; idx < i ; idx++){
-    for(int idz = 0; idz < y ; idz++){
-      c = fgetc(fichier);
-      	printf("%c", c);
-	*(niveau->terrain+i*idx+idz) = c;
-    }
-    }*/
-  
-  /*while ((c = fgetc(fichier)) != EOF){
-    *(niveau->terrain+idx) = c;
-    idx++;
-    }*/
   fclose(fichier);
   return niveau;
 }
-
-/*
-int indice_case_sur_terrain (niveau_t* niveau, int colonne, int ligne){
-	return colonne * niveau->lignes + ligne;
-	}*/
