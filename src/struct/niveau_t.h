@@ -15,6 +15,10 @@ void detruire_niveau (niveau_t* niveau);
 // Détermine pour le niveau spéfcifié l'indice du tableau terrain correspondant aux coordonnées spécifiées
 int indice_case_sur_terrain (niveau_t* niveau, int colonne, int ligne);
 
+void coordonnees_par_indice (niveau_t* niveau, int indice, int* colonne, int* ligne);
+
+int taille_tableau_terrain (niveau_t* niveau);
+
 // Modifie une case du terrain du niveau passé en paramètre et la remplace par car
 void place_sur_terrain (niveau_t* niveau, int colonne, int ligne, char car);
 

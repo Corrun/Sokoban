@@ -14,10 +14,8 @@ int main(void){
   printf("1\n");
   affichage_niveau(niv1);*/
   
+  niveau_t* niveau = lecture_du_niveau(2);
   
-  
-  niveau_t* niv0 = lecture_du_niveau(0);
-  
-  affichage_niveau(niv0);
+  affichage_niveau(niveau);
   return 0;
 }

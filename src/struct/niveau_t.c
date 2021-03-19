@@ -30,6 +30,15 @@ int indice_case_sur_terrain (niveau_t* niveau, int colonne, int ligne){
 	return ligne * niveau->colonnes + colonne;
 }
 
+void coordonnees_par_indice (niveau_t* niveau, int indice, int* colonne, int* ligne){
+  *ligne = (int)(indice / niveau->colonnes);
+  *colonne = (int)(indice % niveau->colonnes);
+}
+
+int taille_tableau_terrain (niveau_t* niveau){
+  return niveau->lignes * niveau->colonnes;
+}
+
 void place_sur_terrain (niveau_t* niveau, int colonne, int ligne, char car){
 	// On calcule l'indice de la case à modifier
 	int indice = indice_case_sur_terrain(niveau, colonne, ligne);
@@ -62,20 +71,19 @@ void initialise_terrain(niveau_t* niveau){
 }
 
 void affichage_niveau(niveau_t* niveau){
-  int retourALaLigne = 0;
-
-  for(int colonne = 0 ; colonne < niveau->colonnes ; colonne ++){
-    for(int ligne = 0 ; ligne < niveau->lignes ; ligne++){
-      if(retourALaLigne > niveau->colonnes){
-        printf("\n");
-        retourALaLigne = 0;
-      }
-      
-      
-      printf("%c", lecture_du_terrain(niveau,colonne,ligne));
-      retourALaLigne++;
+  for (int ligne = 0; ligne < niveau->lignes; ligne++){
+    for (int colonne = 0; colonne < niveau->colonnes; colonne++){
+      printf("%c", lecture_du_terrain(niveau, colonne, ligne));
+      //printf("AFFICHAGE DE %d %d\n", colonne, ligne);
     }
+    printf("\n");
   }
+  /*printf("T=%d\n", taille_tableau_terrain(niveau));
+  for (int i = 0; i < taille_tableau_terrain(niveau); ++i){
+    //printf("%s", niveau->terrain[i] == EOF ? "." : "-");
+    char c = niveau->terrain[i];
+    printf("%d (%c)\t\n", c, c);
+  }*/
 }
 
 niveau_t* lecture_du_niveau(int quel_niveau){
@@ -87,24 +95,23 @@ niveau_t* lecture_du_niveau(int quel_niveau){
   int colonne;
   int ligne;
   
-  fscanf(fichier, "%d %d\n", &colonne, &ligne);
+  fscanf(fichier, "%d %d", &colonne, &ligne);
   niveau_t* niveau = nouveau_niveau(colonne, ligne);
-  
+
   char car = fgetc(fichier);
   int terrainIdx = 0;
+  int taille_tab_terrain = taille_tableau_terrain(niveau);
 
-  while(car != EOF)
+  while(car != EOF && terrainIdx <= taille_tab_terrain)
   {
-    ligne = (int)(terrainIdx / niveau->colonnes);
-    colonne = (int)(terrainIdx % niveau->colonnes);
-   
-    if (car != '\n'){
-      niveau->terrain[terrainIdx] = car;
-      //printf("%c",lecture_du_terrain (niveau, colonne, ligne));
+    coordonnees_par_indice(niveau, terrainIdx, &colonne, &ligne);
+
+    if (car != '\r' && car != '\n'){
+      place_sur_terrain(niveau, colonne, ligne, car);
+      //printf("%d\n",lecture_du_terrain(niveau, colonne, ligne));
       ++terrainIdx;
-    }/*else{
-      printf("\n");
-      }*/
+    }
+
     car = fgetc(fichier);
   }
   printf("\n");
@@ -114,7 +121,7 @@ niveau_t* lecture_du_niveau(int quel_niveau){
 
 
 /*
-if(c == ' '){
+        if(c == ' '){
           niveau->terrain[idx] = TILE_EMPTY;
         }else if(c == '#'){
           niveau->terrain[idx] = TILE_WALL;
