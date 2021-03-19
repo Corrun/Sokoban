@@ -66,26 +66,22 @@ void affichage_niveau(niveau_t* niveau){
 }
 
 niveau_t* lecture_du_niveau(int quel_niveau){
-  niveau_t* a = nouveau_niveau(10,7); 
   FILE* fichier;
   char chemin_du_niveau[100];
-  printf("vla le fichier ouvert \n");
-  //sprintf(chemin_du_niveau,"./../../niveau/niveau_%d",quel_niveau);
-  sprintf(chemin_du_niveau,"niveau_%d",quel_niveau);
-  printf("%s\n",chemin_du_niveau);
+  sprintf(chemin_du_niveau,"./niveau/niveau_%d",quel_niveau);
   fichier = fopen(chemin_du_niveau,"r");
-
-  if(fichier == NULL){
-    printf("null null le fichier nuull !\n");
-  }
-  
+  int i;
+  int y;
+  int idx = 0;
   char c;
-  printf("On début le parcours de fichier \n");
+  fscanf(fichier,"%d %d",&i,&y);
+  //printf(">%d %d<\n", i,y);
+  niveau_t* niveau = nouveau_niveau(i,y);
   while ((c = fgetc(fichier)) != EOF){
-    printf("%c",c);
+    *(niveau->terrain+idx) = c;
+    idx++;
   }
-
   fclose(fichier);
   
-  return a;
+  return niveau;
 }
