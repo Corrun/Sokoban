@@ -62,13 +62,11 @@ void initialise_terrain(niveau_t* niveau){
 }
 
 void affichage_niveau(niveau_t* niveau){
- int colonne = niveau->colonnes;
- int ligne =niveau->lignes;
- for (int i = 0; i <= ligne; i++){
-  for (int y = 0; y <= colonne; y++){
-  //printf(".");
-   printf("%c",lecture_du_terrain (niveau, y, i));
-   // printf(".");
+  for (int ligne = 0; ligne <= niveau->lignes; ligne++){
+    for (int colonne = 0; colonne <= niveau->colonnes; colonne++){
+    //printf(".");
+    printf("%c",lecture_du_terrain (niveau, colonne, ligne));
+    // printf(".");
   }//printf("\n");
  }
 }
@@ -76,24 +74,44 @@ void affichage_niveau(niveau_t* niveau){
 niveau_t* lecture_du_niveau(int quel_niveau){
   FILE* fichier;
   char chemin_du_niveau[100];
-  sprintf(chemin_du_niveau,"./niveau/niveau_%d",quel_niveau);
-  fichier = fopen(chemin_du_niveau,"r");
+  sprintf(chemin_du_niveau,"./niveau/niveau_%d", quel_niveau);
+  fichier = fopen(chemin_du_niveau, "r");
   
   int colonne;
   int ligne;
   
-  char c;
-  fscanf(fichier,"%d %d",&colonne,&ligne);
+  fscanf(fichier, "%d %d\n", &colonne, &ligne);
+  niveau_t* niveau = nouveau_niveau(colonne, ligne);
   
-  niveau_t* niveau = nouveau_niveau(colonne,ligne);
-  for(int idx = 0; idx <= ligne; idx ++){
+  char car = fgetc(fichier);
+  int terrainIdx = 0;
+
+  while(car != EOF)
+  {
+    ligne = (int)(terrainIdx / niveau->colonnes);
+    colonne = (int)(terrainIdx % niveau->colonnes);
+
+    if (car != '\n'){
+      niveau->terrain[terrainIdx] = car;
+      printf("%c",lecture_du_terrain (niveau, colonne, ligne));
+      ++terrainIdx;
+    }else{
+      printf("\n");
+    }
+    
+    //printf("%c", car);
+
+    car = fgetc(fichier);
+  }
+
+
+  /*for(int idx = 0; idx <= ligne; idx ++){
     for (int idz = 0; idz <= colonne; idz++){
       c = fgetc(fichier);
       place_sur_terrain(niveau, idz,idx, c);
-      printf("%c",c);
+      printf("%c", c);
     }
-  }
-  printf("\n");
+  }*/  
   fclose(fichier);
   return niveau;
 }
