@@ -4,3 +4,4 @@
 
 # Ignore build/ directory and subfolders/files
 [Bb]uild/
+.vscode/
