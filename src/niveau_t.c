@@ -1,7 +1,4 @@
-#include <stdlib.h>
-#include <stdio.h>
-#include "niveau_t.h"
-#include "../constants.h"
+#include "../include/main.h"
 
 niveau_t* nouveau_niveau (int nb_colonnes, int nb_lignes){
 	// Allocation de l'espace mémoire pour l'instance du niveau
@@ -119,7 +116,9 @@ niveau_t* lecture_du_niveau(int quel_niveau){
   return niveau;
 }
 
+void liberation_du_niveau(niveau_t* niveau){
 
+}
 /*
         if(c == ' '){
           niveau->terrain[idx] = TILE_EMPTY;

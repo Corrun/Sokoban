@@ -5,9 +5,9 @@ CC=gcc
 CFLAGS=-Wall
 
 
-build: src/*.c src/*.h src/struct/*.c src/struct/*.h
+build: src/*.c include/*.h
 	mkdir -p $(BUILD_DIR)
-	$(CC) $(CFLAGS) -o $(OUTPUT) src/*.c src/struct/*.c
+	$(CC) $(CFLAGS) -o $(OUTPUT) src/*.c
 
 run: build ./$(OUTPUT)
 	./$(OUTPUT)

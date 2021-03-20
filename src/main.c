@@ -1,8 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include "struct/niveau_t.h"
-#include "constants.h"
-
+#include "../include/main.h"
 
 int main(void){
 
@@ -14,8 +10,9 @@ int main(void){
   printf("1\n");
   affichage_niveau(niv1);*/
   
-  niveau_t* niveau = lecture_du_niveau(2);
-  
-  affichage_niveau(niveau);
+  //niveau_t* niveau = lecture_du_niveau(2);
+  //affichage_niveau(niveau);
+
+  entree_du_joueur();
   return 0;
 }

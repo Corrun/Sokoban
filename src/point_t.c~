@@ -1,0 +1,6 @@
+#include "../include/main.h"
+
+char entree_du_joueur(void){
+
+  return 'a';
+}
