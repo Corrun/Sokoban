@@ -3,10 +3,12 @@
 
 
 char entree_du_joueur(void){
-  initscr();
-  int var;
-  var = getchar();
   
+  int var;
+  do
+  {
+    var = getchar();
+  } while (var != 'z');
   printf("%c\n",var);
   return var;
 }
