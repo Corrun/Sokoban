@@ -12,7 +12,6 @@ char entree_du_joueur(void){
 
 point_t* nouveau_personnage(int colonne, int ligne){
   point_t* perso = malloc(sizeof(point_t));
-
   perso->colonnes = colonne;
 	perso->lignes = ligne;
   return perso;
