@@ -1,8 +1,13 @@
 #include "../include/main.h"
 
+
+
 char entree_du_joueur(void){
-  char var;
+  initscr();
+  int var;
   var = getchar();
+  
   printf("%c\n",var);
   return var;
 }
+
