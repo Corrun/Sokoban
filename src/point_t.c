@@ -8,7 +8,7 @@ char entree_du_joueur(void){
   do
   {
     var = getchar();
-  } while (var != 'z');
+  } while (var != 'z' && var != 'q' && var != 's' && var != 'd');
   printf("%c\n",var);
   return var;
 }
