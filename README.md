@@ -33,7 +33,7 @@ Et ensuite de lancer la compilation où l'executable .. bref demerdez vous
 <img align="center" style="float: left; margin: 0 10px 0 0;" src="https://i.imgur.com/HSXXKde.png" height=20% width=20%/>
 
 ## Dédicasse à personne fallait être la !
-Nous remercions nos collaborateurs :
+Nous remercions nos collaborateurs :</br>
 ALMEIDA Néo </br>
 ROUX Hugo</br>
 VANOORENBERGHE Amaury</br>
