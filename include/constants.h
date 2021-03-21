@@ -19,4 +19,9 @@
 #define TILE_PLAYER '@'
 #define TILE_PLAYER_ON_TARGET '+'
 
+#define DIR_UP 'z'
+#define DIR_LEFT 'q'
+#define DIR_DOWN 's'
+#define DIR_RIGHT 'd'
+
 #endif // CONSTANTS_H_

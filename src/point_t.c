@@ -5,7 +5,7 @@ char entree_du_joueur (void){
   do
   {
     var = getchar();
-  } while (var != 'z' && var != 'q' && var != 's' && var != 'd');
+  } while (var != DIR_UP && var != DIR_LEFT && var != DIR_DOWN && var != DIR_RIGHT);
   printf("%c\n",var);
   return var;
 }
