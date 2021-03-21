@@ -1,9 +1,6 @@
 #ifndef NIVEAU_T_H_
 #define NIVEAU_T_H_
 
-// Structure de donnée représentant un niveau
-
-
 // Crée un nouveau niveau de taille nb_colonnes * nb_lignes et retourne un pointeur vers l'instance créée
 niveau_t* nouveau_niveau (int nb_colonnes, int nb_lignes);
 
