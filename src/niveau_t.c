@@ -1,5 +1,6 @@
-#include "../include/main.h"
+#include "main.h"
 
+// Crée un nouveau niveau de taille nb_colonnes * nb_lignes et retourne un pointeur vers l'instance créée
 niveau_t* nouveau_niveau (int nb_colonnes, int nb_lignes){
 	// Allocation de l'espace mémoire pour l'instance du niveau
 	niveau_t* niveau = malloc(sizeof(niveau_t));
@@ -14,6 +15,7 @@ niveau_t* nouveau_niveau (int nb_colonnes, int nb_lignes){
 	return niveau;
 }
 
+// Supprime une instance de type niveau_t passée en paramètre avec son pointeur
 void detruire_niveau (niveau_t* niveau){
 	// On libère la mémoire du terrain avant celle de l'instance
 	// Sinon on a une fuite de mémoire car on ne peut plus référencer niveau->terrain
@@ -21,6 +23,7 @@ void detruire_niveau (niveau_t* niveau){
 	free(niveau);
 }
 
+// Détermine pour le niveau spéfcifié l'indice du tableau terrain correspondant aux coordonnées spécifiées
 int indice_case_sur_terrain (niveau_t* niveau, int colonne, int ligne){
 	// On calcule la position dans le tableau terrain
 	// Lecture de gauche à droite puis de haut en bas
@@ -36,6 +39,7 @@ int taille_tableau_terrain (niveau_t* niveau){
   return niveau->lignes * niveau->colonnes;
 }
 
+// Modifie une case du terrain du niveau passé en paramètre et la remplace par car
 void place_sur_terrain (niveau_t* niveau, int colonne, int ligne, char car){
 	// On calcule l'indice de la case à modifier
 	int indice = indice_case_sur_terrain(niveau, colonne, ligne);
@@ -44,6 +48,7 @@ void place_sur_terrain (niveau_t* niveau, int colonne, int ligne, char car){
 	niveau->terrain[indice] = car;
 }
 
+// Lis le contenu du terrain aux coordonées spécifiées en paramètre
 char lecture_du_terrain (niveau_t* niveau, int colonne, int ligne){
 	// On calcule l'indice de la case à lire
 	int indice = indice_case_sur_terrain(niveau, colonne, ligne);

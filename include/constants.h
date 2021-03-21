@@ -1,3 +1,6 @@
+#ifndef CONSTANTS_H_
+#define CONSTANTS_H_
+
 /*
 — ’ ’ représente les cases vides
 — ’#’ représente les murs (cases infranchissables)
@@ -15,3 +18,5 @@
 #define TILE_CRATE_ON_TARGET '*'
 #define TILE_PLAYER '@'
 #define TILE_PLAYER_ON_TARGET '+'
+
+#endif // CONSTANTS_H_
