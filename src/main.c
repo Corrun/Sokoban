@@ -10,9 +10,9 @@ int main(void){
   printf("1\n");
   affichage_niveau(niv1);*/
   
-  //niveau_t* niveau = lecture_du_niveau(2);
-  //affichage_niveau(niveau);
+  niveau_t* niveau = lecture_du_niveau(667);
+  affichage_niveau(niveau);
 
-  entree_du_joueur();
+  //entree_du_joueur();
   return 0;
 }
