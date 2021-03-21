@@ -23,4 +23,6 @@ niveau_t* lecture_du_niveau (int quel_niveau);
 
 void analyser_case_niveau (niveau_t* niveau, int indice);
 
+void deplacement (niveau_t* niveau, char direction);
+
 #endif // NIVEAU_T_H_

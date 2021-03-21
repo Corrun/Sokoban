@@ -137,20 +137,15 @@ void analyser_case_niveau (niveau_t* niveau, int indice){
       break;
   }
 }
-/*
-        if(c == ' '){
-          niveau->terrain[idx] = TILE_EMPTY;
-        }else if(c == '#'){
-          niveau->terrain[idx] = TILE_WALL;
-        }else if(c == '$'){
-          niveau->terrain[idx] = TILE_CRATE;
-        }else if(c == '.'){
-          niveau->terrain[idx] = TILE_CRATE_ON_TARGET;
-        }else if(c == '*'){
-          niveau->terrain[idx] = TILE_PLAYER;
-        }else if(c == '+'){
-          niveau->terrain[idx] = TILE_PLAYER_ON_TARGET;
-        }else{
-          niveau->terrain[idx] = TILE_EMPTY;
-        }
-*/
+
+// Déplacer le joueur (si possible) dans la direction indiquée
+void deplacement (niveau_t* niveau, char direction){ // TODO: Implement
+  point_t* un_en_avant, deux_en_avant;
+
+  switch (direction){
+    case DIR_UP:
+      
+
+      break;
+  }
+}

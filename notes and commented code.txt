@@ -1,0 +1,15 @@
+if(c == ' '){
+	niveau->terrain[idx] = TILE_EMPTY;
+}else if(c == '#'){
+	niveau->terrain[idx] = TILE_WALL;
+}else if(c == '$'){
+	niveau->terrain[idx] = TILE_CRATE;
+}else if(c == '.'){
+	niveau->terrain[idx] = TILE_CRATE_ON_TARGET;
+}else if(c == '*'){
+	niveau->terrain[idx] = TILE_PLAYER;
+}else if(c == '+'){
+	niveau->terrain[idx] = TILE_PLAYER_ON_TARGET;
+}else{
+	niveau->terrain[idx] = TILE_EMPTY;
+}
