@@ -35,7 +35,7 @@ perso_t* trouver_perso(niveau_t* niveau){
     int colonne, ligne;
 
     // On récupère les coordonnées correspondantes à l'indice de parcours
-    coordonnees_par_indice(niveau, index, &colonne, &ligne);
+    indice_vers_coordonnees_niveau(niveau, index, &colonne, &ligne);
 
     // On créée et initialise un nouveau personnage
     perso_t* personnage = nouveau_personnage();

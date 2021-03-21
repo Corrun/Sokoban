@@ -24,13 +24,13 @@ void detruire_niveau (niveau_t* niveau){
 }
 
 // Détermine pour le niveau spéfcifié l'indice du tableau terrain correspondant aux coordonnées spécifiées
-int indice_case_sur_terrain (niveau_t* niveau, int colonne, int ligne){
+int coordonnees_vers_indice_terrain (niveau_t* niveau, int colonne, int ligne){
 	// On calcule la position dans le tableau terrain
 	// Lecture de gauche à droite puis de haut en bas
 	return ligne * niveau->colonnes + colonne;
 }
 
-void coordonnees_par_indice (niveau_t* niveau, int indice, int* colonne, int* ligne){
+void indice_vers_coordonnees_niveau (niveau_t* niveau, int indice, int* colonne, int* ligne){
   *ligne = (int)(indice / niveau->colonnes);
   *colonne = (int)(indice % niveau->colonnes);
 }
@@ -42,7 +42,7 @@ int taille_tableau_terrain (niveau_t* niveau){
 // Modifie une case du terrain du niveau passé en paramètre et la remplace par car
 void place_sur_terrain (niveau_t* niveau, int colonne, int ligne, char car){
 	// On calcule l'indice de la case à modifier
-	int indice = indice_case_sur_terrain(niveau, colonne, ligne);
+	int indice = coordonnees_vers_indice_terrain(niveau, colonne, ligne);
 
 	// On remplace la valeur par car
 	niveau->terrain[indice] = car;
@@ -51,7 +51,7 @@ void place_sur_terrain (niveau_t* niveau, int colonne, int ligne, char car){
 // Lis le contenu du terrain aux coordonées spécifiées en paramètre
 char lecture_du_terrain (niveau_t* niveau, int colonne, int ligne){
 	// On calcule l'indice de la case à lire
-	int indice = indice_case_sur_terrain(niveau, colonne, ligne);
+	int indice = coordonnees_vers_indice_terrain(niveau, colonne, ligne);
 
 	return niveau->terrain[indice];
 }
@@ -64,7 +64,7 @@ void initialise_terrain(niveau_t* niveau){
     for(int y = 0; y < niveau->lignes ; y++){ // ... sur le tableau
       
       // On se sert d'une fonction géniale qui permet d'accéder a une case du tableau sans soucis
-      indice = indice_case_sur_terrain(niveau, i, y);
+      indice = coordonnees_vers_indice_terrain(niveau, i, y);
 
       // Et on rempli le terrain de mur ...
       niveau->terrain[indice] = TILE_WALL;
@@ -106,7 +106,7 @@ niveau_t* lecture_du_niveau(int quel_niveau){
 
   while(car != EOF && terrainIdx <= taille_tab_terrain)
   {
-    coordonnees_par_indice(niveau, terrainIdx, &colonne, &ligne);
+    indice_vers_coordonnees_niveau(niveau, terrainIdx, &colonne, &ligne);
 
     if (car != '\r' && car != '\n'){
       place_sur_terrain(niveau, colonne, ligne, car);
