@@ -1,17 +1,18 @@
-#ifndef TYPES_H_
-#define TYPES_H_
+#ifndef STRUCTS_H_
+#define STRUCTS_H_
 
-// Structure de donnée représentant un joueur
+// Structure de donnée représentant des coordonnées 2D
 typedef struct{
   int ligne; // Coordonnée verticale (Y)
   int colonne; // Coordonnée horizontale (X)
-} perso_t;
+} point_t;
 
 // Structure de donnée représentant un niveau
 typedef struct{
   int lignes; // Nombre de lignes du niveau (hauteur en cases)
   int colonnes; // Nombre de colonnes du niveau (largeur en cases)
   char* terrain; // Contenu du niveau sous forme de caractères
+  point_t* perso; // Position du personnage
 } niveau_t;
 
-#endif // TYPES_H_
+#endif // STRUCTS_H_

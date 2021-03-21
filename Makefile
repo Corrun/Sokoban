@@ -4,11 +4,15 @@ OUTPUT=$(BUILD_DIR)/sokoban
 CC=gcc
 CFLAGS=-Wall
 
+SOURCE=src
 INCLUDE=include
 
-build: src/*.c include/*.h
+build: $(SOURCE)/* $(INCLUDE)/*
 	mkdir -p $(BUILD_DIR)
 	$(CC) $(CFLAGS) -I$(INCLUDE) -o $(OUTPUT) src/*.c
 
 run: build ./$(OUTPUT)
 	./$(OUTPUT)
+
+clean:
+	rm -rf $(BUILD_DIR)
