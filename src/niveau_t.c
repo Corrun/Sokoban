@@ -1,4 +1,4 @@
-#include "../include/main.h"
+#include "main.h"
 
 niveau_t* nouveau_niveau (int nb_colonnes, int nb_lignes){
 	// Allocation de l'espace mémoire pour l'instance du niveau

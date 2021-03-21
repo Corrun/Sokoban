@@ -1,3 +1,6 @@
+#ifndef NIVEAU_T_H_
+#define NIVEAU_T_H_
+
 // Structure de donnée représentant un niveau
 
 
@@ -25,3 +28,5 @@ void initialise_terrain(niveau_t* niveau);
 void affichage_niveau(niveau_t* niveau);
 
 niveau_t* lecture_du_niveau(int quel_niveau);
+
+#endif // NIVEAU_T_H_

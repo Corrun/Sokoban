@@ -1,4 +1,4 @@
-#include "../include/main.h"
+#include "main.h"
 
 char entree_du_joueur(void){
   int var;
