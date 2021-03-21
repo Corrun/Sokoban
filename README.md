@@ -17,7 +17,7 @@ Il lui est impossible de :
 - Pousser trois caisses
 - Casser les murs 
 - Se téléporter
-- Finir le jeu <img align="center" style="float: left; margin: 0 10px 0 0;" src="https://i.imgur.com/KAqRB7y.png" height=20% width=20%/>
+- Finir le jeu <img align="center" style="float: left; margin: 0 10px 0 0;" src="https://i.imgur.com/KAqRB7y.png" height=5% width=5%/>
 
 ## Installation :
 Il suffit de télécharger le code, où de cloner le git avec ce lien :
@@ -34,9 +34,9 @@ Et ensuite de lancer la compilation où l'executable .. bref demerdez vous
 
 ## Dédicasse à personne fallait être la !
 Nous remercions nos collaborateurs :
-ALMEIDA Néo
-ROUX Hugo
-VANOORENBERGHE Amaury
+ALMEIDA Néo </br>
+ROUX Hugo</br>
+VANOORENBERGHE Amaury</br>
 <br>
 Librairie utilisées :
 Stdio..
