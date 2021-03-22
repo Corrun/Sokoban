@@ -5,7 +5,8 @@ char entree_du_joueur (void){
   do
   {
     var = getchar();
-  } while (var != DIR_UP && var != DIR_LEFT && var != DIR_DOWN && var != DIR_RIGHT);
+    var = majuscule_to_minuscule(var);    
+  } while (var != DIR_UP && var != DIR_LEFT && var != DIR_DOWN && var != DIR_RIGHT && var != LEAVE);
   printf("%c\n",var);
   return var;
 }
@@ -47,3 +48,4 @@ point_t* trouver_perso (niveau_t* niveau){
   // Si le niveau ne comporte pas de case personnage, on retourne un pointeur nul
   return NULL;
 }
+

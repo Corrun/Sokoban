@@ -24,5 +24,6 @@
 #define DIR_DOWN 's'
 #define DIR_RIGHT 'd'
 #define RESTART 'r'
+#define LEAVE 'l'
 
 #endif // CONSTANTS_H_

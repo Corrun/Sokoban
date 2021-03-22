@@ -26,5 +26,4 @@ char majuscule_to_minuscule(char lettre){
 	}else{
 		return lettre;
 	}
-
 }

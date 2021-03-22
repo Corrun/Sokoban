@@ -10,9 +10,11 @@ system("clear");
   printf("1\n");
   affichage_niveau(niv1);*/
   
-  afficher_menu();
   
-  niveau_t* niveau = lecture_du_niveau(choix_du_niveau());
+
+  afficher_menu();
+  int niveauActuel = choix_du_niveau();
+  niveau_t* niveau = lecture_du_niveau(niveauActuel);
   affichage_niveau(niveau);
   int nombre_de_move = 0;
   do{
@@ -20,13 +22,21 @@ system("clear");
     printf("Nombre de coups: %d\n", nombre_de_move);
     affichage_niveau(niveau);
     char direction = entree_du_joueur();
+    if(direction == LEAVE){
+      break;
+    }
     deplacement(niveau, direction);
     nombre_de_move++;
   }while(nombre_de_caisse_restante_sur_terrain(niveau) != 0);
 
   system("clear");
   affichage_niveau(niveau);
-  printf("GG T'AS FINI LE JEU EN %d COUPS !!!!!!!!!!!\n",nombre_de_move);
+  if(nombre_de_caisse_restante_sur_terrain(niveau)==0){
+    printf("GG T'AS FINI LE JEU EN %d COUPS !!!!!!!!!!!\n",nombre_de_move); 
+  }else{
+    printf("T'es qu'une sale merde\n");
+  }
+  
 
   return 0;
 }
