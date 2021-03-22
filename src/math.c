@@ -19,3 +19,12 @@ int max (int premier, int deuxieme){
 		return premier;
 	}
 }
+
+char majuscule_to_minuscule(char lettre){
+	if(lettre >=65 && lettre <= 90){
+		return lettre + 32;
+	}else{
+		return lettre;
+	}
+
+}
