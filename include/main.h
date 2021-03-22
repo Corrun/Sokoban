@@ -10,5 +10,6 @@
 #include "./point_t.h"
 #include "./niveau_t.h"
 #include "./math.h"
+#include "./menu.h"
 
 #endif // MAIN_H_

@@ -1,7 +1,7 @@
 #include "main.h"
 
 int main(void){
-
+system("clear");
   /*niveau_t* niv1 = nouveau_niveau(10,10);
   initialise_terrain(niv1);
   printf("1\n");
@@ -10,8 +10,9 @@ int main(void){
   printf("1\n");
   affichage_niveau(niv1);*/
   
+  afficher_menu();
   
-  niveau_t* niveau = lecture_du_niveau(0);
+  niveau_t* niveau = lecture_du_niveau(choix_du_niveau());
   affichage_niveau(niveau);
   int nombre_de_move = 0;
   do{
