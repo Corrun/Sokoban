@@ -10,8 +10,9 @@ system("clear");
   printf("1\n");
   affichage_niveau(niv1);*/
   
-  
 
+
+  // FIX Mettre dans une fonction alternative, pour externaliser le jeu et pouvoir relancer un niveau sans soucis (par exemple)
   afficher_menu();
   int niveauActuel = choix_du_niveau();
   niveau_t* niveau = lecture_du_niveau(niveauActuel);
@@ -33,10 +34,10 @@ system("clear");
   affichage_niveau(niveau);
   if(nombre_de_caisse_restante_sur_terrain(niveau)==0){
     printf("GG T'AS FINI LE JEU EN %d COUPS !!!!!!!!!!!\n",nombre_de_move); 
+    // FIX > Add la fonction pour ajouter le meilleur score //// On garde quoi ? Les 3 meilleurs ???
   }else{
     printf("T'es qu'une sale merde\n");
   }
-  
 
   return 0;
 }
