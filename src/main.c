@@ -1,6 +1,7 @@
 #include "main.h"
 
 int main(void){
+
   /*niveau_t* niv1 = nouveau_niveau(10,10);
   initialise_terrain(niv1);
   printf("1\n");
@@ -9,9 +10,22 @@ int main(void){
   printf("1\n");
   affichage_niveau(niv1);*/
   
-  niveau_t* niveau = lecture_du_niveau(667);
+  
+  niveau_t* niveau = lecture_du_niveau(0);
   affichage_niveau(niveau);
+  int nombre_de_move = 0;
+  do{
+    system("clear");
+    printf("Nombre de coups: %d\n", nombre_de_move);
+    affichage_niveau(niveau);
+    char direction = entree_du_joueur();
+    deplacement(niveau, direction);
+    nombre_de_move++;
+  }while(nombre_de_caisse_restante_sur_terrain(niveau) != 0);
 
-  //entree_du_joueur();
+  system("clear");
+  affichage_niveau(niveau);
+  printf("GG T'AS FINI LE JEU EN %d COUPS !!!!!!!!!!!\n",nombre_de_move);
+
   return 0;
 }

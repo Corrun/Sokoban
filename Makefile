@@ -7,7 +7,7 @@ CFLAGS=-Wall
 SOURCE=src
 INCLUDE=include
 
-build: $(SOURCE)/* $(INCLUDE)/*
+build: clean $(SOURCE)/* $(INCLUDE)/*
 	mkdir -p $(BUILD_DIR)
 	$(CC) $(CFLAGS) -I$(INCLUDE) -o $(OUTPUT) src/*.c
 

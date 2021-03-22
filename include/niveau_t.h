@@ -13,7 +13,11 @@ int taille_tableau_terrain (niveau_t* niveau);
 
 void place_sur_terrain (niveau_t* niveau, int colonne, int ligne, char car);
 
+void place_sur_terrain_par_coordonnees (niveau_t* niveau, point_t* coord, char car);
+
 char lecture_du_terrain (niveau_t* niveau, int colonne, int ligne);
+
+char lecture_du_terrain_par_coordonnees (niveau_t* niveau, point_t* coord);
 
 void initialise_terrain (niveau_t* niveau);
 
@@ -25,4 +29,11 @@ void analyser_case_niveau (niveau_t* niveau, int indice);
 
 void deplacement (niveau_t* niveau, char direction);
 
+bool case_libre_sur_terrain (niveau_t* niveau, int colonne, int ligne);
+
+bool caisse_sur_terrain (niveau_t* niveau, int colonne, int ligne);
+
+int nombre_de_caisse_restante_sur_terrain(niveau_t* niveau);
+
 #endif // NIVEAU_T_H_
+
