@@ -11,6 +11,7 @@ typedef struct{
 typedef struct{
   int lignes; // Nombre de lignes du niveau (hauteur en cases)
   int colonnes; // Nombre de colonnes du niveau (largeur en cases)
+  int nombreDePas; // Nombre de pas réalisé dans un niveau
   char* terrain; // Contenu du niveau sous forme de caractères
   point_t* perso; // Position du personnage
 } niveau_t;
