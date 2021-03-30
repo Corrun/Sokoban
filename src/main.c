@@ -1,25 +1,13 @@
 #include "main.h"
 
 int main(void){
-system("clear");
-  /*niveau_t* niv1 = nouveau_niveau(10,10);
-  initialise_terrain(niv1);
-  printf("1\n");
-  place_sur_terrain(niv1,4,2,TILE_EMPTY);
-  place_sur_terrain(niv1,6,5,TILE_EMPTY);
-  printf("1\n");
-  affichage_niveau(niv1);*/
-  
-  int score = 0;
-
-  score = lecture_du_score(0);
-
-  printf("Score du niveau 0: %d\n", score);
-
+  system("clear");
   // FIX Mettre dans une fonction alternative, pour externaliser le jeu et pouvoir relancer un niveau sans soucis (par exemple)
-  /*afficher_menu();
-  int niveauActuel = choix_du_niveau();
-  niveau_t* niveau = lecture_du_niveau(niveauActuel);
+  afficher_menu();
+  int niveau_actuel = choix_du_niveau();
+  niveau_t* niveau = lecture_du_niveau(niveau_actuel);
+  int high_score = lecture_du_score(niveau_actuel);
+
   affichage_niveau(niveau);
   do{
     system("clear");
@@ -35,12 +23,21 @@ system("clear");
   system("clear");
   affichage_niveau(niveau);
   if(nombre_de_caisse_restante_sur_terrain(niveau)==0){
-    printf("GG T'AS FINI LE JEU EN %d COUPS !!!!!!!!!!!\n", niveau->nb_de_pas);
+
+    printf("Bravo, tu as terminé le niveau %d en %d cpoups", niveau_actuel, niveau->nb_de_pas);
+    if (high_score == -1 ||  niveau->nb_de_pas < high_score){
+      // Nouveau high score
+      ecriture_du_score(niveau_actuel, niveau->nb_de_pas);
+      printf(" (nouveau high score)");
+    }
+    printf("\n");
+    //printf("GG T'AS FINI LE JEU EN %d COUPS !!!!!!!!!!!\n", niveau->nb_de_pas);
+    
     // FIX > Add la fonction pour ajouter le meilleur score //// On garde quoi ? Les 3 meilleurs ???
   }else{
     printf("Quel ragequit de la part du joueur français!\n");
   }
-  liberation_du_niveau(niveau);*/
+  liberation_du_niveau(niveau);
 
   return 0;
 }

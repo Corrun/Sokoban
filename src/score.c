@@ -31,7 +31,9 @@ void ecriture_du_score (int quel_niveau, int score){
 	char chemin_du_niveau[100];
  	sprintf(chemin_du_niveau,"./niveau/score_%d", quel_niveau);
 
-	fichier = NULL;
+	fichier = fopen(chemin_du_niveau, "w");
+
+	fprintf(fichier, "%d", score);
 
 	fclose(fichier);
 }
