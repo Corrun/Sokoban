@@ -4,7 +4,6 @@
 // Où n est le numéro d'un niveau
 int lecture_du_score (int quel_niveau){
 	FILE* fichier;
-
 	char chemin_du_niveau[100];
 
  	sprintf(chemin_du_niveau,"./niveau/score_%d", quel_niveau);
