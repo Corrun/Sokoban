@@ -7,4 +7,4 @@
 # Exclude IDE user settings folder
 .vscode/
 # Exclude high scores
-niveau/score_.
+niveau/score_*
