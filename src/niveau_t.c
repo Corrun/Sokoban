@@ -8,6 +8,7 @@ niveau_t* nouveau_niveau (int nb_colonnes, int nb_lignes){
 	// On assigne les valeurs des attributs de niveau_t
 	niveau->colonnes = nb_colonnes;
 	niveau->lignes = nb_lignes;
+  niveau->nb_de_pas = 0;
 
 	// On alloue un nouvel espace mémoire pour le terrain de nb_colonnes * nb_lignes cases
 	niveau->terrain = malloc(sizeof(char) * nb_colonnes * nb_lignes);
@@ -226,6 +227,8 @@ void deplacement (niveau_t* niveau, char direction){
     // On "déplace" le perso
     niveau->perso->colonne = un_en_avant->colonne;
     niveau->perso->ligne = un_en_avant->ligne;
+
+    niveau->nb_de_pas++;
   }
 
   free(un_en_avant);
