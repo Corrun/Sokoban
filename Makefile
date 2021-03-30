@@ -20,7 +20,7 @@ clean:
 
 # Install required packages using apt (development env)
 install-dev-with-apt:
-	apt-get install libncurses5-dev ncurses-doc
+	apt-get install libncurses5 libncurses5-dev ncurses-doc
 
 # Install required packages using apt (prod)
 install-with-apt:
