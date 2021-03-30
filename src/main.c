@@ -10,8 +10,14 @@ system("clear");
   printf("1\n");
   affichage_niveau(niv1);*/
   
+  int score = 0;
+
+  score = lecture_du_score(0);
+
+  printf("Score du niveau 0: %d\n", score);
+
   // FIX Mettre dans une fonction alternative, pour externaliser le jeu et pouvoir relancer un niveau sans soucis (par exemple)
-  afficher_menu();
+  /*afficher_menu();
   int niveauActuel = choix_du_niveau();
   niveau_t* niveau = lecture_du_niveau(niveauActuel);
   affichage_niveau(niveau);
@@ -34,7 +40,7 @@ system("clear");
   }else{
     printf("Quel ragequit de la part du joueur français!\n");
   }
-  liberation_du_niveau(niveau);
+  liberation_du_niveau(niveau);*/
 
   return 0;
 }

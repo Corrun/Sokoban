@@ -4,4 +4,7 @@
 
 # Ignore build/ directory and subfolders/files
 [Bb]uild/
+# Exclude IDE user settings folder
 .vscode/
+# Exclude high scores
+niveau/score_.
