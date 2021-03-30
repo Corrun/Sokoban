@@ -12,7 +12,7 @@ niveau_t* nouveau_niveau (int nb_colonnes, int nb_lignes){
 
 	// On alloue un nouvel espace mémoire pour le terrain de nb_colonnes * nb_lignes cases
 	niveau->terrain = malloc(sizeof(char) * nb_colonnes * nb_lignes);
-
+  
   // Les coordonnées du joueur sont pour le moment inconnues...
   niveau->perso = NULL;
 
@@ -23,6 +23,7 @@ niveau_t* nouveau_niveau (int nb_colonnes, int nb_lignes){
 void liberation_du_niveau (niveau_t* niveau){
 	// On libère la mémoire du terrain avant celle de l'instance
 	// Sinon on a une fuite de mémoire car on ne peut plus référencer niveau->terrain
+  free(niveau->perso);
 	free(niveau->terrain);
 	free(niveau);
 }
