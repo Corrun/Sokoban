@@ -24,7 +24,7 @@ int main(void){
   affichage_niveau(niveau);
   if(nombre_de_caisse_restante_sur_terrain(niveau)==0){
 
-    printf("Bravo, tu as terminé le niveau %d en %d cpoups", niveau_actuel, niveau->nb_de_pas);
+    printf("Bravo, tu as terminé le niveau %d en %d coups", niveau_actuel, niveau->nb_de_pas);
     if (high_score == -1 ||  niveau->nb_de_pas < high_score){
       // Nouveau high score
       ecriture_du_score(niveau_actuel, niveau->nb_de_pas);
@@ -33,6 +33,8 @@ int main(void){
     printf("\n");
     //printf("GG T'AS FINI LE JEU EN %d COUPS !!!!!!!!!!!\n", niveau->nb_de_pas);
     
+    nom_du_joueur();
+
     // FIX > Add la fonction pour ajouter le meilleur score //// On garde quoi ? Les 3 meilleurs ???
   }else{
     printf("Quel ragequit de la part du joueur français!\n");
