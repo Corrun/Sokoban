@@ -19,11 +19,20 @@
 #define TILE_PLAYER '@'
 #define TILE_PLAYER_ON_TARGET '+'
 
+#define DISPLAY_TILE_EMPTY ' '
+#define DISPLAY_TILE_WALL '📦'
+#define DISPLAY_TILE_CRATE '$'
+#define DISPLAY_TILE_TARGET '.'
+#define DISPLAY_TILE_CRATE_ON_TARGET '*'
+#define DISPLAY_TILE_PLAYER '!'
+#define DISPLAY_TILE_PLAYER_ON_TARGET '+'
+
 #define DIR_UP 'z'
 #define DIR_LEFT 'q'
 #define DIR_DOWN 's'
 #define DIR_RIGHT 'd'
 #define RESTART 'r'
 #define LEAVE 'l'
+// ◼️ ◻️ 😂
 
 #endif // CONSTANTS_H_
