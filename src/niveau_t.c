@@ -87,6 +87,7 @@ void initialise_terrain(niveau_t* niveau){
   }
 }
 
+
 // Afficher le contenu du niveau dans le terminal
 void affichage_niveau(niveau_t* niveau){
   // On "visite" le niveau par ligne puis par colonne
@@ -94,15 +95,37 @@ void affichage_niveau(niveau_t* niveau){
     for (int colonne = 0; colonne < niveau->colonnes; colonne++){
       // Lecture de la case du terrain
       char car = lecture_du_terrain(niveau, colonne, ligne);
-      
+      switch (car){
+        case TILE_EMPTY:
+          car = DISPLAY_TILE_EMPTY;
+          break;
+        case TILE_WALL:
+          car = DISPLAY_TILE_WALL;
+          break;
+        case TILE_CRATE:
+          car = DISPLAY_TILE_CRATE;
+          break;
+        case TILE_TARGET:
+          car = DISPLAY_TILE_TARGET;
+          break;
+        case TILE_CRATE_ON_TARGET:
+          car = DISPLAY_TILE_CRATE_ON_TARGET;
+          break;
+        case TILE_PLAYER:
+          car = DISPLAY_TILE_PLAYER;
+          break;
+        case TILE_PLAYER_ON_TARGET:
+          car = DISPLAY_TILE_PLAYER_ON_TARGET;
+          break;
+      }
       // Si le joueur est sur la case
       if (niveau->perso->colonne == colonne && niveau->perso->ligne == ligne){
         switch(car){
           case TILE_EMPTY: // Si la case est vide, afficher un joueur
-            car = TILE_PLAYER;
+            car = DISPLAY_TILE_PLAYER;
             break;
            case TILE_TARGET: // Si la case est une cible, afficher un joueur sur une cible
-            car = TILE_PLAYER_ON_TARGET;
+            car = DISPLAY_TILE_PLAYER_ON_TARGET;
             break;
         }
       }
@@ -113,6 +136,42 @@ void affichage_niveau(niveau_t* niveau){
     printf("\n"); // Retour à la ligne
   }
 }
+/*
+void affichage_niveau(niveau_t* niveau){
+  char caractereTrouve;
+ for (int ligne = 0; ligne < niveau->lignes; ligne++){
+    for (int colonne = 0; colonne < niveau->colonnes; colonne++){
+      switch (caractereTrouve){
+        case TILE_EMPTY:
+          caractereTrouve = DISPLAY_TILE_EMPTY;
+          break;
+        case TILE_WALL:
+          caractereTrouve = DISPLAY_TILE_WALL;
+          break;
+        case TILE_CRATE:
+          caractereTrouve = DISPLAY_TILE_CRATE;
+          break;
+        case TILE_TARGET:
+          caractereTrouve = DISPLAY_TILE_TARGET;
+          break;
+        case TILE_CRATE_ON_TARGET:
+          caractereTrouve = DISPLAY_TILE_CRATE_ON_TARGET;
+          break;
+        case TILE_PLAYER:
+          caractereTrouve = DISPLAY_TILE_PLAYER;
+          break;
+        case TILE_PLAYER_ON_TARGET:
+          caractereTrouve = DISPLAY_TILE_PLAYER_ON_TARGET;
+          break;
+        default:
+          return;
+      }
+
+      printf("%c", caractereTrouve);
+    }
+  }
+
+}*/
 
 // Lire un niveau depuis un fichier (dans niveau/)
 niveau_t* lecture_du_niveau (int numero_niveau){
