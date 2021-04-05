@@ -20,7 +20,7 @@
 #define TILE_PLAYER_ON_TARGET '+'
 
 #define DISPLAY_TILE_EMPTY ' '
-#define DISPLAY_TILE_WALL '📦'
+#define DISPLAY_TILE_WALL '#'
 #define DISPLAY_TILE_CRATE '$'
 #define DISPLAY_TILE_TARGET '.'
 #define DISPLAY_TILE_CRATE_ON_TARGET '*'

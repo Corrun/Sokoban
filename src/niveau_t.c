@@ -16,6 +16,8 @@ niveau_t* nouveau_niveau (int nb_colonnes, int nb_lignes){
   // Les coordonnées du joueur sont pour le moment inconnues...
   niveau->perso = NULL;
 
+  // L'état précédent n'existe pas encore
+  niveau->etat_precedent_niveau = NULL;
 	return niveau;
 }
 
@@ -235,6 +237,8 @@ void analyser_case_niveau (niveau_t* niveau, int indice){
 void deplacement (niveau_t* niveau, char direction){
   point_t *un_en_avant, *deux_en_avant; // Pointeurs vers 1/2 case(s) en avant avant de se déplacer
 
+  
+
   // On calcule les coordonnées des case un pas et deux pas en avant (en fonction de la direction)
   switch (direction){
     case DIR_UP:
@@ -256,6 +260,10 @@ void deplacement (niveau_t* niveau, char direction){
     default: // Direction invalide
       return;
   }
+
+  
+  // Avant de se déplacer, on fait une sauvegarde du niveau (pour avoir la possibilité de revenir en arrière)
+  memcpy(niveau->etat_precedent_niveau, niveau, sizeof(niveau_t));
 
   // Si caisse en face et case libre encore après, on pousse la caisse
   if (caisse_sur_terrain(niveau, un_en_avant->colonne, un_en_avant->ligne)
@@ -338,4 +346,9 @@ int nombre_de_caisse_restante_sur_terrain(niveau_t* niveau){
   }
 
   return nombre_de_caisse;
+}
+
+void controle_z(void){
+
+
 }

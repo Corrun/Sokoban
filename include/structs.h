@@ -14,6 +14,7 @@ typedef struct{
   char* terrain; // Contenu du niveau sous forme de caractères
   point_t* perso; // Position du personnage
   int nb_de_pas; // Nombre de pas réalisé dans un niveau
+  void* etat_precedent_niveau; // Etat precedent du niveau, permet de revenir en arrière
 } niveau_t;
 
 #endif // STRUCTS_H_

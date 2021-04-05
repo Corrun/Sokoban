@@ -1,12 +1,15 @@
 #include "main.h"
 
 int main(void){
+  int instruction_menu;
   system("clear");
   // FIX Mettre dans une fonction alternative, pour externaliser le jeu et pouvoir relancer un niveau sans soucis (par exemple)
   afficher_menu();
-  int niveau_actuel = choix_du_niveau();
-  niveau_t* niveau = lecture_du_niveau(niveau_actuel);
-  int high_score = lecture_du_score(niveau_actuel);
+
+  instruction_menu = scanf("%d",&instruction_menu);
+
+  instruction_menu(instruction_menu);
+ 
 
   affichage_niveau(niveau);
   do{
@@ -22,6 +25,7 @@ int main(void){
 
   system("clear");
   affichage_niveau(niveau);
+
   if(nombre_de_caisse_restante_sur_terrain(niveau)==0){
 
     printf("Bravo, tu as terminé le niveau %d en %d coups", niveau_actuel, niveau->nb_de_pas);
@@ -39,6 +43,7 @@ int main(void){
   }else{
     printf("Quel ragequit de la part du joueur français!\n");
   }
+
   liberation_du_niveau(niveau);
 
   return 0;

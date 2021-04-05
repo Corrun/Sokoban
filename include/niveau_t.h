@@ -35,5 +35,6 @@ bool caisse_sur_terrain (niveau_t* niveau, int colonne, int ligne);
 
 int nombre_de_caisse_restante_sur_terrain(niveau_t* niveau);
 
+void ctrlZ(niveau_t* niveau);
 #endif // NIVEAU_T_H_
 

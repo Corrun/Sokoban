@@ -38,7 +38,7 @@ void ecriture_du_score (int quel_niveau, int score){
 	fclose(fichier);
 }
 
-//demander le nom du joueur puis l'enregistrer dans le tabeau des highscores
+// Demander le nom du joueur puis l'enregistrer dans le tabeau des highscores
 char* nom_du_joueur (void) {
     char* nom = malloc(sizeof(char) * 8);
     printf("Entrez votre nom : ");
