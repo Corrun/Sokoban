@@ -1,14 +1,14 @@
 #include "main.h"
 
 int main(void){
-  int instruction_menu;
+  int instruction;
   system("clear");
   // FIX Mettre dans une fonction alternative, pour externaliser le jeu et pouvoir relancer un niveau sans soucis (par exemple)
   afficher_menu();
 
-  instruction_menu = scanf("%d",&instruction_menu);
+  instruction = scanf("%d",&instruction);
 
-  instruction_menu(instruction_menu);
+  instruction_menu(instruction);
  
 
   affichage_niveau(niveau);
