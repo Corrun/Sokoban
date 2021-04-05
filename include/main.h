@@ -13,6 +13,7 @@
 #include "point_t.h"
 #include "niveau_t.h"
 #include "math.h"
+#include "mycurses.h"
 #include "menu.h"
 #include "score.h"
 

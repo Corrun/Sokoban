@@ -33,6 +33,20 @@
 #define DIR_RIGHT 'd'
 #define RESTART 'r'
 #define LEAVE 'l'
-// ◼️ ◻️ 😂
+
+#define KB_ENTER 10
+#define KB_DOWN 258
+#define KB_UP 259
+#define KB_LEFT 260
+#define KB_RIGHT 261
+#define KB_BACKSPACE 263
+
+#define STATE_QUIT 0
+#define STATE_MAINMENU 1
+
+#define MAINMENU_PLAY 0
+#define MAINMENU_RULES 1
+#define MAINMENU_CREDITS 2
+#define MAINMENU_QUIT 3
 
 #endif // CONSTANTS_H_

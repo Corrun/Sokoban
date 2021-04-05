@@ -1,27 +1,60 @@
 #include "main.h"
 
 int main(void){
-  int instruction;
+  initialiser_ncurses();
+  
+  int state = STATE_MAINMENU;
+
+  while (state != STATE_QUIT) {
+    switch(state) {
+      case STATE_MAINMENU:
+        switch (afficher_menu_principal()) {
+          case MAINMENU_PLAY: 
+            choix_du_niveau();
+            break;
+          case MAINMENU_RULES:
+
+            break;
+          case MAINMENU_CREDITS:
+
+            break;
+          case MAINMENU_QUIT:
+            state = STATE_QUIT;
+            break;
+        }
+
+        break;
+    }
+  }
+
+  //afficher_menu_principal();
+  
+  fermer_ncurses();
+  
+  /*int instruction;
   system("clear");
   // FIX Mettre dans une fonction alternative, pour externaliser le jeu et pouvoir relancer un niveau sans soucis (par exemple)
-  afficher_menu();
+  afficher_logo();
 
   instruction = scanf("%d",&instruction);
 
+  int niveau_actuel = choix_du_niveau();
+  niveau_t* niveau = lecture_du_niveau(niveau_actuel);
+  int high_score = lecture_du_score(niveau_actuel);
+
   instruction_menu(instruction);
  
-
   affichage_niveau(niveau);
   do{
     system("clear");
     printf("Nombre de coups: %d\n", niveau->nb_de_pas);
     affichage_niveau(niveau);
     char direction = entree_du_joueur();
-    if(direction == LEAVE){
+    if(direction == LEAVE) {
       break;
     }
     deplacement(niveau, direction);
-  }while(nombre_de_caisse_restante_sur_terrain(niveau) != 0);
+  } while(nombre_de_caisse_restante_sur_terrain(niveau) != 0);
 
   system("clear");
   affichage_niveau(niveau);
@@ -44,7 +77,7 @@ int main(void){
     printf("Quel ragequit de la part du joueur français!\n");
   }
 
-  liberation_du_niveau(niveau);
+  liberation_du_niveau(niveau);*/
 
   return 0;
 }
