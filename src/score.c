@@ -28,8 +28,9 @@ int lecture_du_score (int quel_niveau){
 // (si le score obtenu en fin de partie est supérieur au meilleur score)
 void ecriture_du_score (int quel_niveau, int score){
 	FILE* fichier;
+	char* player_name = nom_du_joueur();
 	char chemin_du_niveau[100];
- 	sprintf(chemin_du_niveau,"./niveau/score_%d", quel_niveau);
+ 	sprintf(chemin_du_niveau,"./niveau/score_%s %d",player_name ,quel_niveau);
 
 	fichier = fopen(chemin_du_niveau, "w");
 
@@ -38,7 +39,7 @@ void ecriture_du_score (int quel_niveau, int score){
 	fclose(fichier);
 }
 
-// Demander le nom du joueur puis l'enregistrer dans le tabeau des highscores
+// Demander le nom du joueur puis l'enregistre dans le tabeau des highscores
 char* nom_du_joueur (void) {
     return menu_saisie_texte("Entrez votre nom", 8);
 }
