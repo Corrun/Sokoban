@@ -5,7 +5,7 @@ char entree_du_joueur (void){
   do
   {
     var = getchar();
-    var = majuscule_to_minuscule(var);    
+    var = majuscule_en_minuscule(var);    
   } while (var != DIR_UP && var != DIR_LEFT && var != DIR_DOWN && var != DIR_RIGHT && var != LEAVE);
   printf("%c\n",var);
   return var;
