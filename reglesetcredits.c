@@ -6,14 +6,16 @@ Ou même les tirer !\n
 \n
 Pour retourner au menu, appuyer sur Q.", DISPLAY_TILE_CRATE, DISPLAY_TILE_TARGET);
 
-
-printf("Un grand merci et bravo aux contributeurs du projets\n
-Je cite :\n
-\tALMEIDA Néo\n
-\tROUX Hugo\n
-\tVANOORENBERGHE Amaury\n
-\n
-Et aux librairies natives\n
-Et à la superbe librairie Ncurses !\n
-\n
-Pour retourner au menu, appuyer sur Q.");
+void afficher_credits (void) {
+    printf(
+    "Un grand merci et bravo aux contributeurs du projets\n
+    Je cite :\n
+    \tALMEIDA Néo\n
+    \tROUX Hugo\n
+    \tVANOORENBERGHE Amaury\n
+    \n
+    Et aux librairies natives\n
+    Et à la superbe librairie Ncurses !\n
+    \n
+    Pour retourner au menu, appuyer sur Q.");
+}
