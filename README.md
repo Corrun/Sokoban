@@ -17,7 +17,7 @@ Il lui est impossible de :
 - Pousser trois caisses
 - Casser les murs 
 - Se téléporter
-- Finir le jeu <img align="center" style="float: left; margin: 0 10px 0 0;" src="https://i.imgur.com/KAqRB7y.png" height=5% width=5%/>
+- Finir le jeu <img align="center" style="float: left; margin: 0 10px 0 0;" src="https://i.imgur.com/KAqRB7y.png" height=3% width=3%/>
 
 ## Installation :
 Il suffit de télécharger le code, où de cloner le git avec ce lien :
@@ -29,7 +29,7 @@ Ou sinon, utiliser la commande `make run` qui permet de compiler et d'executer l
 
 ## Image du jeu .. Qui n'est pas fini !
 
-<img align="center" style="float: left; margin: 0 10px 0 0;" src="https://i.imgur.com/HSXXKde.png" height=20% width=20%/> <img align="center" style="float: center; margin: 0 10px 0 0;" src="https://i.imgur.com/HSXXKde.png" height=20% width=20%/>
+<img align="center" style="float: left; margin: 0 10px 0 0;" src="https://i.imgur.com/HSXXKde.png" height=20% width=20%/> <img align="center" style="float: center; margin: 0 10px 0 0;" src="https://i.imgur.com/HSXXKde.png" height=20% width=20%/></br>
 <img align="center" style="float: left; margin: 0 10px 0 0;" src="https://i.imgur.com/HSXXKde.png" height=30% width=30%/>
 
 ## Collaborateurs du projet :  
@@ -42,7 +42,7 @@ Librairie utilisée :
 Utilisation de Ncurses pour la partie "graphique"  
 
 <br>
-[<img align="left" style="float: center; margin: 0 10px 0 0;" src="https://upload.wikimedia.org/wikipedia/en/thumb/1/15/University_of_Lille_%28logo%29.svg/220px-University_of_Lille_%28logo%29.svg.png"/>](https://www.univ-lille.fr/)
+<img align="left" style="float: center; margin: 0 10px 0 0;" src="https://upload.wikimedia.org/wikipedia/en/thumb/1/15/University_of_Lille_%28logo%29.svg/220px-University_of_Lille_%28logo%29.svg.png"/>(https://www.univ-lille.fr/)
 
 <br>
 <br>
