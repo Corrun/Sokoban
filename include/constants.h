@@ -24,7 +24,7 @@
 #define DISPLAY_TILE_CRATE '$'
 #define DISPLAY_TILE_TARGET '.'
 #define DISPLAY_TILE_CRATE_ON_TARGET '*'
-#define DISPLAY_TILE_PLAYER '!'
+#define DISPLAY_TILE_PLAYER 'M'
 #define DISPLAY_TILE_PLAYER_ON_TARGET '+'
 
 #define DIR_UP 'z'

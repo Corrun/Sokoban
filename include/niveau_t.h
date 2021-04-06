@@ -21,6 +21,10 @@ char lecture_du_terrain_par_coordonnees (niveau_t* niveau, point_t* coord);
 
 void initialise_terrain (niveau_t* niveau);
 
+char affichage_niveau_ncurses (niveau_t* niveau);
+
+int modification_affichage_niveau (niveau_t* niveau, int x, int y, char* symbole);
+
 void affichage_niveau (niveau_t* niveau);
 
 niveau_t* lecture_du_niveau (int quel_niveau);

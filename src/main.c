@@ -9,13 +9,15 @@ int main(void){
     switch(state) {
       case STATE_MAINMENU:
         switch (afficher_menu_principal()) {
-          case MAINMENU_PLAY: 
-            choix_du_niveau();
+          case MAINMENU_PLAY:;
+            int numero_niveau = choix_du_niveau();
+            niveau_t* niveau = lecture_du_niveau(numero_niveau);
+            affichage_niveau_ncurses(niveau);
             break;
-          case MAINMENU_RULES:
+          case MAINMENU_RULES:;
 
             break;
-          case MAINMENU_CREDITS:
+          case MAINMENU_CREDITS:;
 
             break;
           case MAINMENU_QUIT:

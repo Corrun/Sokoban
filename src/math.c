@@ -21,9 +21,9 @@ int max (int premier, int deuxieme){
 }
 
 // Renvoie la lettre majuscule en minuscule.
-char majuscule_to_minuscule(char lettre){
+int majuscule_en_minuscule(int lettre) {
 	// 65 = A ; Z = 90
-	if(lettre >=65 && lettre <= 90){
+	if(lettre >= 'A' && lettre <= 'Z'){
 		return lettre + 32;
 	}else{
 		return lettre;

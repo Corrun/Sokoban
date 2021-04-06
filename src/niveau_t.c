@@ -89,6 +89,102 @@ void initialise_terrain(niveau_t* niveau){
   }
 }
 
+char affichage_niveau_ncurses (niveau_t* niveau) {
+  int yMax, xMax; // Taille de la console en caractères
+	
+	WINDOW* fenetre = nouvelle_fenetre(); // Nouvelle fenêtre
+
+  while (true) {
+    getmaxyx(stdscr, yMax, xMax); // Lire la taille de la console
+		
+		// Centrer la fenêtre
+		centrer_fenetre(fenetre, niveau->lignes + 2, niveau->colonnes + 2, yMax, xMax, 0, 0);  
+
+		effacer_ecran(); // Efface l'ecran
+		
+		wclear(fenetre); // Raffraichi la fenêtre
+		box(fenetre, 0, 0); // Bordure de la fenêtre
+
+    for (int ligne = 0; ligne < niveau->lignes; ++ligne) {
+      for (int colonne = 0; colonne < niveau->colonnes; ++colonne) {
+        char case_terrain = lecture_du_terrain(niveau, colonne, ligne);
+        char case_affichee = '\0';
+
+        int attribut = modification_affichage_niveau(niveau, colonne, ligne, &case_affichee);
+
+        wattron(fenetre, attribut);
+
+        mvwaddch(fenetre, ligne + 1, colonne + 1, case_affichee);
+        wattroff(fenetre, attribut);
+        wrefresh(fenetre);
+      }
+    }
+    
+    //sprintf("Coups %c", niveau->nb_de_pas);
+    wattron(fenetre, A_STANDOUT);
+    mvwprintw(fenetre, 0, 2, "Titre"); // Titre de la fenêtre
+    wattroff(fenetre, A_STANDOUT);
+
+    int saisie = majuscule_en_minuscule(wgetch(fenetre));
+
+    switch (saisie) {
+      case KB_UP: case DIR_UP:
+        return DIR_UP;
+      case KB_DOWN: case DIR_DOWN:
+        return DIR_DOWN;
+      case KB_LEFT: case DIR_LEFT:
+        return DIR_LEFT;
+      case KB_RIGHT: case DIR_RIGHT:
+        return DIR_RIGHT;
+      case LEAVE:
+        return LEAVE;
+      case RESTART:
+        return RESTART;
+    }
+  }
+}
+
+int modification_affichage_niveau (niveau_t* niveau, int x, int y, char* symbole) {
+  char case_terrain = lecture_du_terrain(niveau, x, y);
+
+  if (x == niveau->perso->colonne && y == niveau->perso->ligne) {
+    switch (case_terrain) {
+      case TILE_EMPTY:
+        case_terrain = TILE_PLAYER;
+        break;
+      case TILE_TARGET:
+        case_terrain = TILE_PLAYER_ON_TARGET;
+        break;
+    }
+  }
+
+
+  switch (case_terrain) {
+    case TILE_EMPTY:
+      *symbole = DISPLAY_TILE_EMPTY;
+      break;
+    case TILE_WALL:
+      *symbole = DISPLAY_TILE_WALL;
+      return A_DIM;
+    case TILE_CRATE:
+      *symbole = DISPLAY_TILE_CRATE;
+      return COLOR_PAIR(COLOR_YELLOW);
+    case TILE_TARGET:
+      *symbole = DISPLAY_TILE_TARGET;
+      break;
+    case TILE_CRATE_ON_TARGET:
+      *symbole = DISPLAY_TILE_CRATE_ON_TARGET;
+      break;
+    case TILE_PLAYER:
+      *symbole = DISPLAY_TILE_PLAYER;
+      return A_BOLD | COLOR_PAIR(COLOR_GREEN);
+    case TILE_PLAYER_ON_TARGET:
+      *symbole = DISPLAY_TILE_PLAYER_ON_TARGET;
+      break;
+  }
+
+  return 0;
+}
 
 // Afficher le contenu du niveau dans le terminal
 void affichage_niveau(niveau_t* niveau){
