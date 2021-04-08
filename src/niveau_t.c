@@ -1,5 +1,62 @@
 #include "main.h"
 
+liste_niveaux_t* etats_niveaux;
+
+liste_niveaux_t* nouvelle_liste_niveaux (int taille) {
+  liste_niveaux_t *resultat = malloc(sizeof(liste_niveaux_t));
+  init_liste_niveaux (resultat, taille);
+  return resultat;
+}
+
+void init_liste_niveaux (liste_niveaux_t* liste, int taille) {
+  liste->memoire = malloc (sizeof (niveau_t *) * taille);
+  liste->taille = 0;
+  liste->taille_memoire = taille;
+}
+
+void liberation_de_la_liste_niveaux (liste_niveaux_t* liste)
+{
+  free (liste->memoire);
+  liste->memoire = NULL;
+  liste->taille = 0;
+  liste->taille_memoire = 0;
+}
+
+void agrandir_liste_de_niveaux (liste_niveaux_t *liste, int ajout)
+{
+  if (ajout > 0)
+  {
+    niveau_t** nouveau = malloc (sizeof (niveau_t*) * (liste->taille_memoire + ajout));
+    memcpy (nouveau, liste->memoire, sizeof (niveau_t*) * liste->taille);
+    free (liste->memoire);
+    liste->memoire = nouveau;
+    liste->taille_memoire += ajout;
+  }
+}
+
+void ajouter_niveau (liste_niveaux_t *liste, niveau_t* niveau)
+{
+  if (liste->taille == liste->taille_memoire) agrandir_liste_de_niveaux (liste, 10);
+
+  liste->memoire[liste->taille] = niveau;
+  niveau->indice = liste->taille;
+  liste->taille += 1;
+}
+
+void enlever_dernier_niveau (liste_niveaux_t *liste)
+{
+  if (liste->taille > 0) {
+    liberation_du_niveau (haut_de_liste(etats_niveaux));
+    liste->taille -= 1;
+  }
+}
+
+niveau_t* haut_de_liste (liste_niveaux_t* liste) {
+  if (liste->taille == 0) return NULL;
+
+  return liste->memoire[liste->taille - 1];
+}
+
 // Crée un nouveau niveau de taille nb_colonnes * nb_lignes et retourne un pointeur vers l'instance créée
 niveau_t* nouveau_niveau (int nb_colonnes, int nb_lignes){
 	// Allocation de l'espace mémoire pour l'instance du niveau
@@ -8,7 +65,6 @@ niveau_t* nouveau_niveau (int nb_colonnes, int nb_lignes){
 	// On assigne les valeurs des attributs de niveau_t
 	niveau->colonnes = nb_colonnes;
 	niveau->lignes = nb_lignes;
-  niveau->nb_de_pas = 0;
   
 	// On alloue un nouvel espace mémoire pour le terrain de nb_colonnes * nb_lignes cases
 	niveau->terrain = malloc(sizeof(char) * nb_colonnes * nb_lignes);
@@ -17,7 +73,6 @@ niveau_t* nouveau_niveau (int nb_colonnes, int nb_lignes){
   niveau->perso = NULL;
 
   // L'état précédent n'existe pas encore, on l'initialise
-  niveau->etat_precedent_niveau = NULL;
 	return niveau;
 }
 
@@ -124,7 +179,7 @@ char affichage_niveau_ncurses (niveau_t* niveau) {
     wattron(fenetre, A_STANDOUT);
     mvwprintw(fenetre, 0, 2, "Titre"); // Titre de la fenetre
     char nb_coups[100];
-    sprintf(nb_coups, "Coups: %d", niveau->nb_de_pas);
+    sprintf(nb_coups, "Coups: %d", etats_niveaux->taille - 1);
     
     mvwprintw(fenetre, niveau->lignes+1, niveau->colonnes + 1 - strlen(nb_coups), nb_coups);
 
@@ -290,6 +345,10 @@ niveau_t* lecture_du_niveau (int numero_niveau){
   sprintf(chemin_du_niveau,"./niveau/niveau_%d", numero_niveau);
   fichier = fopen(chemin_du_niveau, "r"); // On ouvre le fichier en lecture
   
+  if (!fichier) {
+    return NULL;
+  }
+
   int colonne, ligne; // Variables pour stocker les coordonnées
   
   fscanf(fichier, "%d %d", &colonne, &ligne); // On lit la taille du niveau dans le fichier
@@ -353,18 +412,15 @@ niveau_t* copier_niveau (niveau_t *source) {
   memcpy (copie->terrain, source->terrain, sizeof(char) * taille_tableau_terrain(source));
   copie->perso = malloc (sizeof (point_t));
   memcpy (copie->perso, source->perso, sizeof (point_t));
-  copie->nb_de_pas = source->nb_de_pas;
-  // Ici, on ne veut pas effectuer de 'deep copy', on veut directement copier le pointeur
-  copie->etat_precedent_niveau = source->etat_precedent_niveau;
-  
+
   return copie;
 }
 
 // Déplacer le joueur (si possible) dans la direction indiquée
-void deplacement (niveau_t* niveau, char direction){
+void deplacement (niveau_t* n, char direction){
   point_t *un_en_avant, *deux_en_avant; // Pointeurs vers 1/2 case(s) en avant avant de se déplacer
 
-  niveau_t* precedent = copier_niveau(niveau);
+  niveau_t* niveau = copier_niveau(n);
   
   // On calcule les coordonnées des case un pas et deux pas en avant (en fonction de la direction)
   switch (direction){
@@ -418,12 +474,9 @@ void deplacement (niveau_t* niveau, char direction){
     // On "déplace" le perso
     niveau->perso->colonne = un_en_avant->colonne;
     niveau->perso->ligne = un_en_avant->ligne;
-
-    niveau->etat_precedent_niveau = precedent;
-
-    niveau->nb_de_pas++;
+    ajouter_niveau (etats_niveaux, niveau);
   } else {
-    liberation_du_niveau(precedent);
+    liberation_du_niveau(niveau);
   }
 
   free(un_en_avant);
@@ -475,13 +528,7 @@ int nombre_de_caisse_restante_sur_terrain(niveau_t* niveau){
   return nombre_de_caisse;
 }
 
-void annuler_deplacement(niveau_t* niveau) {
-  niveau_t* precedent = copier_niveau(niveau->etat_precedent_niveau);
-  
-  if (precedent) {
-    liberation_du_niveau(niveau);
-    *niveau = *precedent;
-    //niveau = lecture_du_niveau(1);
-    //niveau = precedent;
-  }
+void annuler_deplacement ()
+{
+  if (etats_niveaux->taille > 1) enlever_dernier_niveau (etats_niveaux);
 }

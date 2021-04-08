@@ -13,8 +13,15 @@ typedef struct niveau_t {
   int colonnes; // Nombre de colonnes du niveau (largeur en cases)
   char* terrain; // Contenu du niveau sous forme de caractères
   point_t* perso; // Position du personnage
-  int nb_de_pas; // Nombre de pas réalisé dans un niveau
-  struct niveau_t* etat_precedent_niveau; // Etat precedent du niveau, permet de revenir en arrière
+  int indice; // Indice dans la liste de niveaux
 } niveau_t;
+
+// Représente un tableau de niveaux (pour la fonction d'annulation de déplacements)
+typedef struct liste_niveaux_t
+{
+  niveau_t** memoire;
+  int taille; // Nombre de cases utilisées
+  int taille_memoire; // Nombre de cases disponibles
+} liste_niveaux_t;
 
 #endif // STRUCTS_H_
