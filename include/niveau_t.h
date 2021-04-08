@@ -37,8 +37,11 @@ bool case_libre_sur_terrain (niveau_t* niveau, int colonne, int ligne);
 
 bool caisse_sur_terrain (niveau_t* niveau, int colonne, int ligne);
 
-int nombre_de_caisse_restante_sur_terrain(niveau_t* niveau);
+int nombre_de_caisse_restante_sur_terrain (niveau_t* niveau);
 
-void ctrlZ(niveau_t* niveau);
+niveau_t* copier_niveau (niveau_t *source);
+
+void annuler_deplacement (niveau_t* niveau);
+
 #endif // NIVEAU_T_H_
 

@@ -16,5 +16,6 @@
 #include "mycurses.h"
 #include "menu.h"
 #include "score.h"
+#include "jouer.h"
 
 #endif // MAIN_H_

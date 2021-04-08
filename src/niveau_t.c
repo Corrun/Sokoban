@@ -9,20 +9,20 @@ niveau_t* nouveau_niveau (int nb_colonnes, int nb_lignes){
 	niveau->colonnes = nb_colonnes;
 	niveau->lignes = nb_lignes;
   niveau->nb_de_pas = 0;
-
+  
 	// On alloue un nouvel espace mémoire pour le terrain de nb_colonnes * nb_lignes cases
 	niveau->terrain = malloc(sizeof(char) * nb_colonnes * nb_lignes);
   
   // Les coordonnées du joueur sont pour le moment inconnues...
   niveau->perso = NULL;
 
-  // L'état précédent n'existe pas encore
+  // L'état précédent n'existe pas encore, on l'initialise
   niveau->etat_precedent_niveau = NULL;
 	return niveau;
 }
 
 // Supprime une instance de type niveau_t passée en paramètre avec son pointeur
-void liberation_du_niveau (niveau_t* niveau){
+void liberation_du_niveau (niveau_t* niveau) {
 	// On libère la mémoire du terrain avant celle de l'instance
 	// Sinon on a une fuite de mémoire car on ne peut plus référencer niveau->terrain
   free(niveau->perso);
@@ -107,7 +107,7 @@ char affichage_niveau_ncurses (niveau_t* niveau) {
 
     for (int ligne = 0; ligne < niveau->lignes; ++ligne) {
       for (int colonne = 0; colonne < niveau->colonnes; ++colonne) {
-        char case_terrain = lecture_du_terrain(niveau, colonne, ligne);
+        //char case_terrain = lecture_du_terrain(niveau, colonne, ligne);
         char case_affichee = '\0';
 
         int attribut = modification_affichage_niveau(niveau, colonne, ligne, &case_affichee);
@@ -122,25 +122,35 @@ char affichage_niveau_ncurses (niveau_t* niveau) {
     
     //sprintf("Coups %c", niveau->nb_de_pas);
     wattron(fenetre, A_STANDOUT);
-    mvwprintw(fenetre, 0, 2, "Titre"); // Titre de la fenêtre
-    mvwprintw(fenetre, niveau->lignes+1, niveau->colonnes-1, "50"); // Nombre de pas (actuellement à 0 vu que c'est l'initialisation du niveau)
+    mvwprintw(fenetre, 0, 2, "Titre"); // Titre de la fenetre
+    char nb_coups[100];
+    sprintf(nb_coups, "Coups: %d", niveau->nb_de_pas);
+    
+    mvwprintw(fenetre, niveau->lignes+1, niveau->colonnes + 1 - strlen(nb_coups), nb_coups);
+
+    //mvwprintw(fenetre, niveau->lignes+1, niveau->colonnes-5, nb_coups); // Nombre de pas (actuellement à 0 vu que c'est l'initialisation du niveau)
     wattroff(fenetre, A_STANDOUT);
 
     int saisie = majuscule_en_minuscule(wgetch(fenetre));
 
+    //int saisie = wgetch(fenetre);
     switch (saisie) {
-      case KB_UP: case DIR_UP:
+      case KB_UP:
+      case DIR_UP:
         return DIR_UP;
-      case KB_DOWN: case DIR_DOWN:
+      case KB_DOWN:
+      case DIR_DOWN:
         return DIR_DOWN;
-      case KB_LEFT: case DIR_LEFT:
+      case KB_LEFT:
+      case DIR_LEFT:
         return DIR_LEFT;
-      case KB_RIGHT: case DIR_RIGHT:
+      case KB_RIGHT:
+      case DIR_RIGHT:
         return DIR_RIGHT;
       case LEAVE:
-        return LEAVE;
       case RESTART:
-        return RESTART;
+      case CANCEL:
+        return (char)saisie;
     }
   }
 }
@@ -330,12 +340,32 @@ void analyser_case_niveau (niveau_t* niveau, int indice){
   }
 }
 
+// Effectue une copie d'un niveau (pour stocker les états précédents)
+// Cette copie s'assure que l'on a bien une référence distincte sur le terrain
+// Au lieu d'ue copie du pointeur vers ce dernier
+niveau_t* copier_niveau (niveau_t *source) {
+  if (!source) return NULL;
+
+  niveau_t *copie = malloc (sizeof (niveau_t));
+  copie->lignes = source->lignes;
+  copie->colonnes = source->colonnes;
+  copie->terrain = malloc (sizeof (char) * taille_tableau_terrain(source));
+  memcpy (copie->terrain, source->terrain, sizeof(char) * taille_tableau_terrain(source));
+  copie->perso = malloc (sizeof (point_t));
+  memcpy (copie->perso, source->perso, sizeof (point_t));
+  copie->nb_de_pas = source->nb_de_pas;
+  // Ici, on ne veut pas effectuer de 'deep copy', on veut directement copier le pointeur
+  copie->etat_precedent_niveau = source->etat_precedent_niveau;
+  
+  return copie;
+}
+
 // Déplacer le joueur (si possible) dans la direction indiquée
 void deplacement (niveau_t* niveau, char direction){
   point_t *un_en_avant, *deux_en_avant; // Pointeurs vers 1/2 case(s) en avant avant de se déplacer
 
+  niveau_t* precedent = copier_niveau(niveau);
   
-
   // On calcule les coordonnées des case un pas et deux pas en avant (en fonction de la direction)
   switch (direction){
     case DIR_UP:
@@ -357,10 +387,6 @@ void deplacement (niveau_t* niveau, char direction){
     default: // Direction invalide
       return;
   }
-
-  
-  // Avant de se déplacer, on fait une sauvegarde du niveau (pour avoir la possibilité de revenir en arrière)
-  memcpy(niveau->etat_precedent_niveau, niveau, sizeof(niveau_t));
 
   // Si caisse en face et case libre encore après, on pousse la caisse
   if (caisse_sur_terrain(niveau, un_en_avant->colonne, un_en_avant->ligne)
@@ -393,14 +419,18 @@ void deplacement (niveau_t* niveau, char direction){
     niveau->perso->colonne = un_en_avant->colonne;
     niveau->perso->ligne = un_en_avant->ligne;
 
+    niveau->etat_precedent_niveau = precedent;
+
     niveau->nb_de_pas++;
+  } else {
+    liberation_du_niveau(precedent);
   }
 
   free(un_en_avant);
   free(deux_en_avant);
 }
 
-bool case_libre_sur_terrain (niveau_t* niveau, int colonne, int ligne){
+bool case_libre_sur_terrain (niveau_t* niveau, int colonne, int ligne) {
   char car = lecture_du_terrain(niveau, colonne, ligne);
 
   // Si car = TILE_EMPTY ou TILE_TARGET
@@ -445,7 +475,13 @@ int nombre_de_caisse_restante_sur_terrain(niveau_t* niveau){
   return nombre_de_caisse;
 }
 
-void controle_z(void){
-
-
+void annuler_deplacement(niveau_t* niveau) {
+  niveau_t* precedent = copier_niveau(niveau->etat_precedent_niveau);
+  
+  if (precedent) {
+    liberation_du_niveau(niveau);
+    *niveau = *precedent;
+    //niveau = lecture_du_niveau(1);
+    //niveau = precedent;
+  }
 }

@@ -33,6 +33,7 @@
 #define DIR_RIGHT 'd'
 #define RESTART 'r'
 #define LEAVE 'l'
+#define CANCEL 'a'
 
 #define KB_ENTER 10
 #define KB_DOWN 258
