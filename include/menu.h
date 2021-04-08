@@ -8,6 +8,8 @@ void afficher_credits();
 void instruction_menu(int instruction);
 
 int afficher_menu_principal();
+void afficher_liste_niveau_scoreboard();
+
 
 int menu_liste(int hauteur, int largeur, char* titre, char** elements, int nb_elements);
 int menu_saisie_nombre(char* titre);

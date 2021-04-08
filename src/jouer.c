@@ -13,7 +13,7 @@ void jouer (int numero_niveau) {
 	if (!niveau) return;
 
 	ajouter_niveau (etats_niveaux, niveau);
-
+	
 	int saisie = 0;
 	while (!gagne) {
 		niveau = haut_de_liste(etats_niveaux);

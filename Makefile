@@ -12,11 +12,11 @@ build: clean $(SOURCE)/* $(INCLUDE)/*
 	mkdir -p $(BUILD_DIR)
 	$(CC) $(CFLAGS) -I$(INCLUDE) -o $(OUTPUT) src/*.c $(LDFLAGS)
 
-run: build ./$(OUTPUT)
-	./$(OUTPUT)
-
 clean:
 	rm -rf $(BUILD_DIR)
+
+run: build ./$(OUTPUT)
+	./$(OUTPUT)
 
 debug:
 	$(CC) -g -I$(INCLUDE) -o $(OUTPUT) src/*.c $(LDFLAGS)

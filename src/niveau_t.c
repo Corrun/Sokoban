@@ -177,7 +177,7 @@ char affichage_niveau_ncurses (niveau_t* niveau) {
     
     //sprintf("Coups %c", niveau->nb_de_pas);
     wattron(fenetre, A_STANDOUT);
-    mvwprintw(fenetre, 0, 2, "Titre"); // Titre de la fenetre
+    mvwprintw(fenetre, 0, 2, "changerLeNom"); // Titre de la fenetre
     char nb_coups[100];
     sprintf(nb_coups, "Coups: %d", etats_niveaux->taille - 1);
     
@@ -246,7 +246,7 @@ int modification_affichage_niveau (niveau_t* niveau, int x, int y, char* symbole
       return A_BOLD | COLOR_PAIR(COLOR_GREEN);
     case TILE_PLAYER_ON_TARGET:
       *symbole = DISPLAY_TILE_PLAYER_ON_TARGET;
-      break;
+      return A_BOLD | COLOR_PAIR(COLOR_GREEN);
   }
 
   return 0;

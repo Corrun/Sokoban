@@ -70,6 +70,33 @@ void afficher_credits(){
 	} while (input != 'q');
 }
 
+void afficher_liste_niveau_scoreboard(){
+	int yMax, xMax; // Taille de la console en caractères
+	effacer_ecran();
+	int input = '\0';
+
+	WINDOW* fenetre = nouvelle_fenetre();
+
+	getmaxyx(stdscr, yMax, xMax); // Lire la taille de la console
+		
+	// Centrer la fenêtre
+	centrer_fenetre(fenetre, 15 , 48 , yMax, xMax, 0, 0);  
+	
+	wclear(fenetre); // Raffraichi la fenêtre
+	box(fenetre, 0, 0); // bordure de la fenêtre
+
+	mvwprintw(fenetre, 0, 2, "Liste des niveaux");
+	mvwprintw(fenetre, 1, 2, "Y'a 0 fichier ptn");
+	
+	
+	
+	
+	do
+	{
+		input = wgetch(fenetre);
+	} while (input != 'q');
+}
+
 /*void instruction_menu() {
     int leave;
     switch (instruction){
@@ -102,13 +129,14 @@ void afficher_credits(){
 }*/
 
 int afficher_menu_principal() {
-    char* entries[4];
+    char* entries[5];
 	entries[0] = "Jouer";
 	entries[1] = "Règles";
 	entries[2] = "Credits";
-	entries[3] = "Quitter";
+	entries[3] = "Scoreboard";
+	entries[4] = "Quitter";
 
-	return menu_liste(15, 48, "Sokoban", entries, 4);
+	return menu_liste(17, 48, "Sokoban", entries, 5);
 }
 
 // Affiche un menu composé d'une liste d'éléments
@@ -140,11 +168,11 @@ int menu_liste(int hauteur, int largeur, char* titre, char** elements, int nb_el
             if (selection == num_element) {
 				wattron(fenetre, A_STANDOUT);
 				wattron(fenetre, COLOR_PAIR(COLOR_RED));
-				mvwprintw(fenetre,  4 + (2 * num_element), 6, " ");
+				mvwprintw(fenetre,  5 + (2 * num_element), 6, " ");
 				wattroff(fenetre, COLOR_PAIR(COLOR_RED));
 			}
 
-			mvwprintw(fenetre,  4 + (2 * num_element), 8, elements[num_element]);
+			mvwprintw(fenetre,  5 + (2 * num_element), 8, elements[num_element]);
 
 			wattroff(fenetre, A_STANDOUT);
 		}
@@ -228,7 +256,7 @@ int menu_saisie_nombre(char* titre) {
 				sscanf(texte_saisi, "%d", &numero);
 				return numero;
 			default:
-				if (longueur_texte < 9 && saisie >= '0' && saisie <= '9') {
+				if (longueur_texte < 9 && saisie >= '0' && saisie <= '9') {					
 					texte_saisi[longueur_texte] = (char)saisie;
 				}
 				break;

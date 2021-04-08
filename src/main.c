@@ -9,7 +9,6 @@ int main(void) {
   affichage_niveau_ncurses(niveau);*/
 
   int state = STATE_MAINMENU;
-
   while (state != STATE_QUIT) {
     switch(state) {
       case STATE_MAINMENU:
@@ -23,6 +22,9 @@ int main(void) {
             break;
           case MAINMENU_CREDITS:;
             afficher_credits();
+            break;
+          case MAINMENU_SCOREBOARD:
+            afficher_liste_niveau_scoreboard(); // Cette fonction permetterai de lister les fichiers niveau/niveau_%d (menu deroulant si possible)
             break;
           case MAINMENU_QUIT:
             state = STATE_QUIT;
