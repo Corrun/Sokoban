@@ -15,10 +15,10 @@ void jouer (int numero_niveau) {
 	ajouter_niveau (etats_niveaux, niveau);
 
 	int saisie = 0;
-	do {
+	while (!gagne) {
 		niveau = haut_de_liste(etats_niveaux);
 		saisie = affichage_niveau_ncurses(niveau);
-		
+		gagne = nombre_de_caisse_restante_sur_terrain(niveau) == 0;
 		
 		switch (saisie) {
 			case LEAVE:
@@ -34,10 +34,9 @@ void jouer (int numero_niveau) {
 				break;
 			default:
 				deplacement(niveau, saisie);
-				gagne = nombre_de_caisse_restante_sur_terrain(niveau) == 0;
 				break;
 		}
-	} while(!gagne);
+	}
 	FIN_JEU:;
 
 	while (etats_niveaux->taille > 0) {
