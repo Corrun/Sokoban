@@ -168,7 +168,7 @@ char affichage_niveau_ncurses (niveau_t* niveau) {
         int attribut = modification_affichage_niveau(niveau, colonne, ligne, &case_affichee);
 
         wattron(fenetre, attribut);
-
+        
         mvwaddch(fenetre, ligne + 1, colonne + 1, case_affichee);
         wattroff(fenetre, attribut);
         wrefresh(fenetre);
