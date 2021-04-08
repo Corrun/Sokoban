@@ -18,6 +18,12 @@ run: build ./$(OUTPUT)
 clean:
 	rm -rf $(BUILD_DIR)
 
+debug:
+	$(CC) -g -I$(INCLUDE) -o $(OUTPUT) src/*.c $(LDFLAGS)
+
+rund: debug ./$(OUTPUT) #Need to install valgrind
+	valgrind -s $(OUTPUT)
+
 # Install required packages using apt (development env)
 install-dev-with-apt:
 	apt-get install libncurses5 libncurses5-dev ncurses-doc
