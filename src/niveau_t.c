@@ -98,7 +98,7 @@ char affichage_niveau_ncurses (niveau_t* niveau) {
     getmaxyx(stdscr, yMax, xMax); // Lire la taille de la console
 		
 		// Centrer la fenêtre
-		centrer_fenetre(fenetre, niveau->lignes + 2, niveau->colonnes + 2, yMax, xMax, 0, 0);  
+		centrer_fenetre(fenetre, niveau->lignes + 3, niveau->colonnes + 2, yMax, xMax, 0, 0);  
 
 		effacer_ecran(); // Efface l'ecran
 		
@@ -123,6 +123,7 @@ char affichage_niveau_ncurses (niveau_t* niveau) {
     //sprintf("Coups %c", niveau->nb_de_pas);
     wattron(fenetre, A_STANDOUT);
     mvwprintw(fenetre, 0, 2, "Titre"); // Titre de la fenêtre
+    mvwprintw(fenetre, niveau->lignes+1, niveau->colonnes-1, "50"); // Nombre de pas (actuellement à 0 vu que c'est l'initialisation du niveau)
     wattroff(fenetre, A_STANDOUT);
 
     int saisie = majuscule_en_minuscule(wgetch(fenetre));

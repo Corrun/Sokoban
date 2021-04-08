@@ -33,16 +33,14 @@ void initialiser_couleur(int couleur) {
 
 // Calcule le centre d'une zone rectangulaire définie par les valeurs haut, gauche, hauteur et largeur
 // Le centre calculé sera stocké dans les valeurs x et y
-void calculer_centre(int hauteur, int largeur, int haut, int gauche, int* y, int* x)
-{
+void calculer_centre(int hauteur, int largeur, int haut, int gauche, int* y, int* x){
 	*y = haut + (hauteur / 2);
 	*x = gauche + (largeur / 2);
 }
 
 // Centre une fenêtre dans une zone rectangulaire définie par les valeurs haut, gauche, hauteur et largeur
 // La fenêtre aura la taille spécifiée par hauteur_cible et largeur_cible
-void centrer_fenetre(WINDOW* fenetre, int hauteur_cible, int largeur_cible, int hauteur, int largeur, int haut, int gauche)
-{
+void centrer_fenetre(WINDOW* fenetre, int hauteur_cible, int largeur_cible, int hauteur, int largeur, int haut, int gauche){
 	int y, x;
 
 	calculer_centre(hauteur, largeur, haut, gauche, &y, &x);
