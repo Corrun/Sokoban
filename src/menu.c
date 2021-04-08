@@ -11,11 +11,63 @@ int choix_du_niveau() {
 }
 
 void afficher_regles(){
-    printf("voir github\nPress Q to leave");
+	int yMax, xMax; // Taille de la console en caractères
+	effacer_ecran();
+	int input = '\0';
+
+	WINDOW* fenetre = nouvelle_fenetre();
+
+	getmaxyx(stdscr, yMax, xMax); // Lire la taille de la console
+		
+	// Centrer la fenêtre
+	centrer_fenetre(fenetre, 15 , 48 , yMax, xMax, 0, 0);  
+	
+	wclear(fenetre); // Raffraichi la fenêtre
+	box(fenetre, 0, 0); // bordure de la fenêtre
+
+	mvwprintw(fenetre, 0, 2, "Regles : ");
+	mvwprintw(fenetre, 1, 1,"Règles classiques de Sokoban :");
+	mvwprintw(fenetre, 2, 1,"Le joueur doit placer toutes les caisses (%c)", DISPLAY_TILE_CRATE);
+	mvwprintw(fenetre, 3, 1,"sur toutes les cibles (%c)", DISPLAY_TILE_TARGET);
+	mvwprintw(fenetre, 4, 1,"Mais attention !");
+	mvwprintw(fenetre, 5, 1,"Un joueur est trop faible pour pousser");
+	mvwprintw(fenetre, 6, 1,"2 caisses ... Ou même les tirer !");
+	mvwprintw(fenetre,13, 1,"Pour retourner au menu, appuyer sur Q.");
+	do
+	{
+		input = wgetch(fenetre);
+	} while (input != 'q');
 }
 
 void afficher_credits(){
-    printf("amaury néo et hugo\nPress Q to leave");
+	int yMax, xMax; // Taille de la console en caractères
+	effacer_ecran();
+	int input = '\0';
+
+	WINDOW* fenetre = nouvelle_fenetre();
+
+	getmaxyx(stdscr, yMax, xMax); // Lire la taille de la console
+		
+	// Centrer la fenêtre
+	centrer_fenetre(fenetre, 15 , 48 , yMax, xMax, 0, 0);  
+	
+	wclear(fenetre); // Raffraichi la fenêtre
+	box(fenetre, 0, 0); // bordure de la fenêtre
+
+	mvwprintw(fenetre, 0, 2, "Credits : ");
+	mvwprintw(fenetre, 1, 2, "Un grand merci et bravo aux contributeurs");
+	mvwprintw(fenetre, 2, 2, "du projets");
+	mvwprintw(fenetre, 3, 2, "Je cite :");
+	mvwprintw(fenetre, 4, 2, "ALMEIDA Néo");
+	mvwprintw(fenetre, 5, 2, "ROUX Hugo");
+	mvwprintw(fenetre, 6, 2, "VANOORENBERGHE Amaury");
+	mvwprintw(fenetre, 8, 2, "Et aux librairies natives");
+	mvwprintw(fenetre, 9, 2, "Et à la superbe librairie Ncurses !");
+	mvwprintw(fenetre,13, 1,"Pour retourner au menu, appuyer sur Q.");
+	do
+	{
+		input = wgetch(fenetre);
+	} while (input != 'q');
 }
 
 /*void instruction_menu() {

@@ -19,10 +19,10 @@ int main(void) {
             jouer(numero_niveau);
             break;
           case MAINMENU_RULES:;
-
+            afficher_regles();
             break;
           case MAINMENU_CREDITS:;
-
+            afficher_credits();
             break;
           case MAINMENU_QUIT:
             state = STATE_QUIT;
