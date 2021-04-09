@@ -6,7 +6,7 @@ int lecture_du_score (int quel_niveau){
 	FILE* fichier;
 	char chemin_du_niveau[100];
 
- 	sprintf(chemin_du_niveau,"./niveau/score_%d", quel_niveau);
+ 	sprintf(chemin_du_niveau,"./niveau/leaderboard_%d", quel_niveau);
 
 	if ((fichier = fopen(chemin_du_niveau, "r"))) {
 		// Le fichier a bien été ouvert
