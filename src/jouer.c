@@ -39,10 +39,13 @@ void jouer (int numero_niveau) {
 	}
 	FIN_JEU:;
 
+	
+
 	while (etats_niveaux->taille > 0) {
 		enlever_dernier_niveau(etats_niveaux);
 	}
 
 
 	// Gestion du score
+	ecriture_du_score(numero_niveau, etats_niveaux->taille);
 }

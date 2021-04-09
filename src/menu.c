@@ -85,10 +85,13 @@ void afficher_liste_niveau_scoreboard(){
 	wclear(fenetre); // Raffraichi la fenêtre
 	box(fenetre, 0, 0); // bordure de la fenêtre
 
-	mvwprintw(fenetre, 0, 2, "Liste des niveaux");
-	mvwprintw(fenetre, 1, 2, "Y'a 0 fichier ptn");
+	int choix = choix_du_niveau();
+
 	
-	
+
+
+	mvwprintw(fenetre, 0, 2, "LeaderBoard Du Niveau %i ", choix);
+	mvwprintw(fenetre, 1, 2, "coucou");
 	
 	do
 	{
@@ -132,7 +135,7 @@ int afficher_menu_principal() {
 	entries[0] = "Jouer";
 	entries[1] = "Règles";
 	entries[2] = "Credits";
-	entries[3] = "Scoreboard";
+	entries[3] = "Leaderboards";
 	entries[4] = "Quitter";
 
 	return menu_liste(17, 48, "Sokoban", entries, 5);
@@ -182,11 +185,11 @@ int menu_liste(int hauteur, int largeur, char* titre, char** elements, int nb_el
 		{
 			case KB_UP:
 				selection--;
-				selection = selection < 0 ? 0 : selection;
+				selection = selection < 0 ? nb_elements - 1 : selection;
 				break;
 			case KB_DOWN:
 				selection++;
-				selection = selection >= nb_elements ? nb_elements - 1 : selection;
+				selection = selection >= nb_elements ? 0 : selection;
 				break;
 			case KB_ENTER:
 				delwin(fenetre);

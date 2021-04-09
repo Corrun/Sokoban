@@ -7,7 +7,7 @@ int lecture_du_score (int quel_niveau){
 	char chemin_du_niveau[100];
 
  	sprintf(chemin_du_niveau,"./niveau/leaderboard_%d", quel_niveau);
-
+	
 	if ((fichier = fopen(chemin_du_niveau, "r"))) {
 		// Le fichier a bien été ouvert
 		int score;
@@ -29,13 +29,11 @@ int lecture_du_score (int quel_niveau){
 void ecriture_du_score (int quel_niveau, int score){
 	FILE* fichier;
 	char* player_name = nom_du_joueur();
-	char chemin_du_niveau[100];
- 	sprintf(chemin_du_niveau,"./niveau/score_%s %d",player_name ,quel_niveau);
-
-	fichier = fopen(chemin_du_niveau, "w");
-
-	fprintf(fichier, "%d", score);
-
+	//char* leaderboard = "leaderboard_%i" + quel_niveau;
+	fichier = fopen("leaderboard_0", "w");
+	
+	fprintf(fichier, "%s %d",player_name , score);
+	
 	fclose(fichier);
 }
 
