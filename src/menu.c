@@ -70,22 +70,35 @@ void afficher_credits(){
 	} while (input != 'q');
 }
 
-void afficher_liste_niveau_scoreboard(){
+void afficher_liste_niveau_scoreboard(int choix_du_niveau){
 	int yMax, xMax; // Taille de la console en caractères
 	effacer_ecran();
 	int input = '\0';
-
+	char chemin_du_score[100];
+	sprintf(chemin_du_score, "niveau/score_%d", choix_du_niveau);
+	FILE* fichier_score = fopen(chemin_du_score, "r"); // 
+	
 	WINDOW* fenetre = nouvelle_fenetre();
 
 	getmaxyx(stdscr, yMax, xMax); // Lire la taille de la console
 		
 	// Centrer la fenêtre
-	centrer_fenetre(fenetre, 15 , 48 , yMax, xMax, 0, 0);  
+	centrer_fenetre(fenetre, 15 , 40 , yMax, xMax, 0, 0);  
 	
 	wclear(fenetre); // Raffraichi la fenêtre
 	box(fenetre, 0, 0); // bordure de la fenêtre
 
 	mvwprintw(fenetre, 0, 2, "Liste des niveaux");
+	int score;
+	int nombre_de_score = 0;
+	fscanf(fichier_score, "%d", &nombre_de_score);
+	if(score == 0){
+		mvwprintw(fenetre, 1, 2, "Aucun score n'as été enregistrer");
+	}else{
+		for (int i = 0; i < nombre_de_score; i++){
+			mvwprintw(fenetre, i+1, 2, "score de jsp qui");
+		}
+	}
 	mvwprintw(fenetre, 1, 2, "Y'a 0 fichier ptn");
 	
 	

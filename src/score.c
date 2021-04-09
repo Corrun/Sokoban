@@ -2,7 +2,7 @@
 
 // Lecture du meilleur score depuis le fichier score_n 
 // Où n est le numéro d'un niveau
-int lecture_du_score (int quel_niveau){
+int lecture_du_meilleur_score (int quel_niveau){
 	FILE* fichier;
 	char chemin_du_niveau[100];
 
@@ -10,13 +10,22 @@ int lecture_du_score (int quel_niveau){
 
 	if ((fichier = fopen(chemin_du_niveau, "r"))) {
 		// Le fichier a bien été ouvert
-		int score;
+		int score_lu;
+		int nombre_de_score = 0;
+		int score_max = 0;
+		int score_max_numero = 0;
+        fscanf(fichier, "%d", &nombre_de_scores);
 
-        fscanf(fichier, "%d", &score);
-
+		for (int score_numero = 0; i < nombre_de_scores; score_numero++){
+			fscanf(fichier, "%s %d", &score_lu); // ????
+			if(score_lu > score_max){ // Besoin de recup le score d'une certaines manière
+				*score = score_max;
+				*score_max_numero = score_numero; // comme ça on a la ligne, ptetre faire +1
+			}
+		}
 		fclose(fichier);
 
-		return score;
+		return score_numero;
 	} else {
 		// Erreur de lecture (le fichier n'existe pas ?)
         
