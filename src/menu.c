@@ -90,7 +90,6 @@ void afficher_liste_niveau_scoreboard(){
 	
 	
 	
-	
 	do
 	{
 		input = wgetch(fenetre);
