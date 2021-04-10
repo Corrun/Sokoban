@@ -29,10 +29,18 @@ int lecture_du_score (int quel_niveau){
 void ecriture_du_score (int quel_niveau, int score){
 	FILE* fichier;
 	char* player_name = nom_du_joueur();
-	//char* leaderboard = "leaderboard_%i" + quel_niveau;
-	fichier = fopen("leaderboard_0", "w");
+	char* leaderboard;
 	
-	fprintf(fichier, "%s %d",player_name , score);
+	sprintf(leaderboard, "./leaderboards/leaderboard_%d", quel_niveau);
+
+	fichier = fopen(leaderboard, "r+");
+	if (fichier == NULL) {
+		char* leaderb;
+		sprintf(leaderb, "touch ./leaderboards/leaderboard_%d", quel_niveau);
+		system(leaderb);
+		fichier = fopen(leaderboard, "r+");
+	}
+	fprintf(fichier, "%s %d","hugo" , score);
 	
 	fclose(fichier);
 }

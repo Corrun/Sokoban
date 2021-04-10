@@ -144,7 +144,7 @@ void initialise_terrain(niveau_t* niveau){
   }
 }
 
-char affichage_niveau_ncurses (niveau_t* niveau) {
+char affichage_niveau_ncurses (niveau_t* niveau, int numero_niveau) {
   int yMax, xMax; // Taille de la console en caractères
 	
 	WINDOW* fenetre = nouvelle_fenetre(); // Nouvelle fenêtre
@@ -177,7 +177,7 @@ char affichage_niveau_ncurses (niveau_t* niveau) {
     
     //sprintf("Coups %c", niveau->nb_de_pas);
     wattron(fenetre, A_STANDOUT);
-    mvwprintw(fenetre, 0, 2, "changerLeNom"); // Titre de la fenetre
+    mvwprintw(fenetre, 0, 1, "Niveau: %i", numero_niveau); // Titre de la fenetre (à changer pour afficher le niveau actuel)
     char nb_coups[100];
     sprintf(nb_coups, "Coups: %d", etats_niveaux->taille - 1);
     

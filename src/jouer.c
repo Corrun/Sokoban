@@ -17,7 +17,7 @@ void jouer (int numero_niveau) {
 	int saisie = 0;
 	while (!gagne) {
 		niveau = haut_de_liste(etats_niveaux);
-		saisie = affichage_niveau_ncurses(niveau);
+		saisie = affichage_niveau_ncurses(niveau, numero_niveau);
 		gagne = nombre_de_caisse_restante_sur_terrain(niveau) == 0;
 		
 		switch (saisie) {
@@ -37,15 +37,16 @@ void jouer (int numero_niveau) {
 				break;
 		}
 	}
+	ecriture_du_score(numero_niveau, (etats_niveaux->taille) - 2);
 	FIN_JEU:;
 
-	
+	// Gestion du score
+
+	// erreur de provenance inconnu
+	// ajoute 2 au score quand ajouté dans le leaderboard
+	//ecriture_du_score(numero_niveau, (etats_niveaux->taille) - 2);
 
 	while (etats_niveaux->taille > 0) {
 		enlever_dernier_niveau(etats_niveaux);
 	}
-
-
-	// Gestion du score
-	ecriture_du_score(numero_niveau, etats_niveaux->taille);
 }
