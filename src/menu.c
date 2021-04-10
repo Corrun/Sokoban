@@ -185,11 +185,11 @@ int menu_liste(int hauteur, int largeur, char* titre, char** elements, int nb_el
 		{
 			case KB_UP:
 				selection--;
-				selection = selection < 0 ? nb_elements - 1 : selection;
+				selection = selection < 0 ? 0 : selection;
 				break;
 			case KB_DOWN:
 				selection++;
-				selection = selection >= nb_elements ? 0 : selection;
+				selection = selection >= nb_elements ? nb_elements - 1 : selection;
 				break;
 			case KB_ENTER:
 				delwin(fenetre);
