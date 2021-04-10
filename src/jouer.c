@@ -1,7 +1,6 @@
 #include "main.h"
 
-
-void jouer (int numero_niveau) {
+void jouer_niveau (int numero_niveau) {
 	DEBUT_JEU:;
 
 	etats_niveaux = nouvelle_liste_niveaux (10);

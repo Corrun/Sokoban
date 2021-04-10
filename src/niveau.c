@@ -1,62 +1,5 @@
 #include "main.h"
 
-liste_niveaux_t* etats_niveaux;
-
-liste_niveaux_t* nouvelle_liste_niveaux (int taille) {
-  liste_niveaux_t *resultat = malloc(sizeof(liste_niveaux_t));
-  init_liste_niveaux (resultat, taille);
-  return resultat;
-}
-
-void init_liste_niveaux (liste_niveaux_t* liste, int taille) {
-  liste->memoire = malloc (sizeof (niveau_t *) * taille);
-  liste->taille = 0;
-  liste->taille_memoire = taille;
-}
-
-void liberation_de_la_liste_niveaux (liste_niveaux_t* liste)
-{
-  free (liste->memoire);
-  liste->memoire = NULL;
-  liste->taille = 0;
-  liste->taille_memoire = 0;
-}
-
-void agrandir_liste_de_niveaux (liste_niveaux_t *liste, int ajout)
-{
-  if (ajout > 0)
-  {
-    niveau_t** nouveau = malloc (sizeof (niveau_t*) * (liste->taille_memoire + ajout));
-    memcpy (nouveau, liste->memoire, sizeof (niveau_t*) * liste->taille);
-    free (liste->memoire);
-    liste->memoire = nouveau;
-    liste->taille_memoire += ajout;
-  }
-}
-
-void ajouter_niveau (liste_niveaux_t *liste, niveau_t* niveau)
-{
-  if (liste->taille == liste->taille_memoire) agrandir_liste_de_niveaux (liste, 10);
-
-  liste->memoire[liste->taille] = niveau;
-  niveau->indice = liste->taille;
-  liste->taille += 1;
-}
-
-void enlever_dernier_niveau (liste_niveaux_t *liste)
-{
-  if (liste->taille > 0) {
-    liberation_du_niveau (haut_de_liste(etats_niveaux));
-    liste->taille -= 1;
-  }
-}
-
-niveau_t* haut_de_liste (liste_niveaux_t* liste) {
-  if (liste->taille == 0) return NULL;
-
-  return liste->memoire[liste->taille - 1];
-}
-
 // Crée un nouveau niveau de taille nb_colonnes * nb_lignes et retourne un pointeur vers l'instance créée
 niveau_t* nouveau_niveau (int nb_colonnes, int nb_lignes){
 	// Allocation de l'espace mémoire pour l'instance du niveau
@@ -83,65 +26,6 @@ void liberation_du_niveau (niveau_t* niveau) {
   free(niveau->perso);
 	free(niveau->terrain);
 	free(niveau);
-}
-
-// Détermine pour le niveau spéfcifié l'indice du tableau terrain correspondant aux coordonnées spécifiées
-int coordonnees_vers_indice_terrain (niveau_t* niveau, int colonne, int ligne){
-	// On calcule la position dans le tableau terrain
-	// Lecture de gauche à droite puis de haut en bas
-	return ligne * niveau->colonnes + colonne;
-}
-
-// Fonction prenant un indice du tableau terrain et renvoyant la ligne/colonne correspondante
-void indice_vers_coordonnees_niveau (niveau_t* niveau, int indice, int* colonne, int* ligne){
-  *ligne = (int)(indice / niveau->colonnes);
-  *colonne = (int)(indice % niveau->colonnes);
-}
-
-// Renvoie la longueur du tableau terrain du niveau spécifié
-int taille_tableau_terrain (niveau_t* niveau){
-  return niveau->lignes * niveau->colonnes;
-}
-
-// Modifie une case du terrain du niveau passé en paramètre et la remplace par car
-void place_sur_terrain (niveau_t* niveau, int colonne, int ligne, char car){
-	// On calcule l'indice de la case à modifier
-	int indice = coordonnees_vers_indice_terrain(niveau, colonne, ligne);
-
-	// On remplace la valeur par car
-	niveau->terrain[indice] = car;
-}
-
-// Modifie une case du terrain du niveau passé en paramètre sous forme de point_t et la remplace par car
-void place_sur_terrain_par_coordonnees (niveau_t* niveau, point_t* coord, char car){
-	place_sur_terrain(niveau, coord->colonne, coord->ligne, car);
-}
-
-// Lis le contenu du terrain aux coordonées spécifiées en paramètre
-char lecture_du_terrain (niveau_t* niveau, int colonne, int ligne){
-	// On calcule l'indice de la case à lire
-	int indice = coordonnees_vers_indice_terrain(niveau, colonne, ligne);
-
-	return niveau->terrain[indice];
-}
-
-// Effectue une lecture du terrain aux coordonnées spécifiées sous forme de point_t
-char lecture_du_terrain_par_coordonnees (niveau_t* niveau, point_t* coord){
-	// On vérifie que les coordonnées sont valides
-  // Si elles ne sont pas dans le terrain, on retourne \0 (NUL)
-	if (coord->colonne < 0 || coord->colonne >= niveau->colonnes || coord->ligne < 0 || coord->ligne >= niveau->lignes){
-    return '\0';
-  }else{
-    return niveau->terrain[coordonnees_vers_indice_terrain(niveau, coord->colonne, coord->ligne)];
-  }
-}
-
-void initialise_terrain(niveau_t* niveau){
-  // On parcours les indices du terrain pour placer des murs sur chaque case
-  for (int indice = 0; indice < taille_tableau_terrain(niveau); ++indice){
-    // On place un mur sur la case n°indice
-    niveau->terrain[indice] = TILE_WALL;
-  }
 }
 
 char affichage_niveau_ncurses (niveau_t* niveau, int numero_niveau) {
@@ -346,6 +230,7 @@ niveau_t* lecture_du_niveau (int numero_niveau){
   fichier = fopen(chemin_du_niveau, "r"); // On ouvre le fichier en lecture
   
   if (!fichier) {
+    menu_message("Fichier introuvable", "Le niveau n'existe pas", 30, 1, COLOR_RED, COLOR_WHITE);
     return NULL;
   }
 
@@ -378,6 +263,13 @@ niveau_t* lecture_du_niveau (int numero_niveau){
   }
   
   fclose(fichier); // On oublie pas de fermer le fichier :D
+
+  if (!niveau->perso) {
+    menu_message("Personnage introuvable", "Le niveau ne contient pas d'emplacement de depart ('@')", 30, 3, COLOR_YELLOW, COLOR_WHITE);
+
+    return NULL;
+  }
+
   return niveau;
 }
 
@@ -414,73 +306,6 @@ niveau_t* copier_niveau (niveau_t *source) {
   memcpy (copie->perso, source->perso, sizeof (point_t));
 
   return copie;
-}
-
-// Déplacer le joueur (si possible) dans la direction indiquée
-void deplacement (niveau_t* n, char direction){
-  point_t *un_en_avant, *deux_en_avant; // Pointeurs vers 1/2 case(s) en avant avant de se déplacer
-
-  niveau_t* niveau = copier_niveau(n);
-  
-  // On calcule les coordonnées des case un pas et deux pas en avant (en fonction de la direction)
-  switch (direction){
-    case DIR_UP:
-      un_en_avant = nouveau_point(niveau->perso->colonne + 0, niveau->perso->ligne - 1);
-      deux_en_avant = nouveau_point(niveau->perso->colonne + 0, niveau->perso->ligne - 2);
-      break;
-    case DIR_DOWN:
-      un_en_avant = nouveau_point(niveau->perso->colonne + 0, niveau->perso->ligne + 1);
-      deux_en_avant = nouveau_point(niveau->perso->colonne + 0, niveau->perso->ligne + 2);
-      break;
-    case DIR_LEFT:
-      un_en_avant = nouveau_point(niveau->perso->colonne - 1, niveau->perso->ligne + 0);
-      deux_en_avant = nouveau_point(niveau->perso->colonne - 2, niveau->perso->ligne + 0);
-      break;
-    case DIR_RIGHT:
-      un_en_avant = nouveau_point(niveau->perso->colonne + 1, niveau->perso->ligne + 0);
-      deux_en_avant = nouveau_point(niveau->perso->colonne + 2, niveau->perso->ligne + 0);
-      break;
-    default: // Direction invalide
-      return;
-  }
-
-  // Si caisse en face et case libre encore après, on pousse la caisse
-  if (caisse_sur_terrain(niveau, un_en_avant->colonne, un_en_avant->ligne)
-    && case_libre_sur_terrain(niveau, deux_en_avant->colonne, deux_en_avant->ligne))
-  {
-    // On remplace la case en face par une case libre du bon type (cible/vide)
-    switch(lecture_du_terrain_par_coordonnees(niveau, un_en_avant)){
-      case TILE_CRATE_ON_TARGET: // Si la case en face est une caisse sur une cible, on remplace par une cible
-        place_sur_terrain_par_coordonnees(niveau, un_en_avant, TILE_TARGET);
-        break;
-      case TILE_CRATE: // Si la case en face est une caisse simple, on remplace par le néant le plus total
-        place_sur_terrain_par_coordonnees(niveau, un_en_avant, TILE_EMPTY);
-        break;
-    }
-
-    // On remplace la case un cran plus loin (que la case en face) par une case du bon type (caisse/caisse sur cible)
-    switch(lecture_du_terrain_par_coordonnees(niveau, deux_en_avant)){
-      case TILE_EMPTY: // Si la case deux pas en avant est vide, on place une caisse
-        place_sur_terrain_par_coordonnees(niveau, deux_en_avant, TILE_CRATE);
-        break;
-      case TILE_TARGET: // Si la case deux pas en avant est une cible, on remplace par une caisse sur une sible
-        place_sur_terrain_par_coordonnees(niveau, deux_en_avant, TILE_CRATE_ON_TARGET);
-        break;
-    }
-  }
-  
-  // Si la case en face est libre
-  if (case_libre_sur_terrain(niveau, un_en_avant->colonne, un_en_avant->ligne)){
-    // On "déplace" le perso
-    niveau->perso->colonne = un_en_avant->colonne;
-    niveau->perso->ligne = un_en_avant->ligne;
-    ajouter_niveau (etats_niveaux, niveau);
-  } else {
-    liberation_du_niveau(niveau);
-  }
-
-  free(un_en_avant);
-  free(deux_en_avant);
 }
 
 bool case_libre_sur_terrain (niveau_t* niveau, int colonne, int ligne) {
@@ -526,9 +351,4 @@ int nombre_de_caisse_restante_sur_terrain(niveau_t* niveau){
   }
 
   return nombre_de_caisse;
-}
-
-void annuler_deplacement ()
-{
-  if (etats_niveaux->taille > 1) enlever_dernier_niveau (etats_niveaux);
 }

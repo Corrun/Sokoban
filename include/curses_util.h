@@ -1,5 +1,5 @@
-#ifndef MYCURSES_H_
-#define MYCURSES_H_
+#ifndef CURSES_UTIL_H
+#define CURSES_UTIL_H
 
 void initialiser_ncurses();
 
@@ -15,4 +15,4 @@ WINDOW* nouvelle_fenetre();
 
 void effacer_ecran();
 
-#endif // MYCURSES_H_
+#endif // CURSES_UTIL_H

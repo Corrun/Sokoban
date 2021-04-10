@@ -8,14 +8,18 @@
 #include <unistd.h>
 #include <string.h>
 
-#include "structs.h"
 #include "constants.h"
-#include "point_t.h"
-#include "niveau_t.h"
 #include "math.h"
-#include "mycurses.h"
+#include "structs.h"
+#include "point.h"
+#include "niveau.h"
+#include "terrain.h"
+#include "liste_niveaux.h"
+#include "curses_util.h"
+#include "niveau_util.h"
 #include "menu.h"
 #include "score.h"
+#include "deplacement.h"
 #include "jouer.h"
 
 #endif // MAIN_H_

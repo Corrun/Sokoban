@@ -33,14 +33,21 @@ void ecriture_du_score (int quel_niveau, int score){
 	
 	sprintf(leaderboard, "./leaderboards/leaderboard_%d", quel_niveau);
 
-	fichier = fopen(leaderboard, "r+");
+	fichier = fopen(leaderboard, "a");
 	if (fichier == NULL) {
 		char* leaderb;
 		sprintf(leaderb, "touch ./leaderboards/leaderboard_%d", quel_niveau);
 		system(leaderb);
-		fichier = fopen(leaderboard, "r+");
+		fichier = fopen(leaderboard, "a");
 	}
-	fprintf(fichier, "%s %d","hugo" , score);
+	/*
+	fprintf(fichier, "%s %d\n", player_name , score);
+	char* nomCheck[100];
+	int scoreAssocie;
+
+	while ((fscanf(%s %d), &nomCheck, &scoreAssocie) != EOF){
+		
+	}*/
 	
 	fclose(fichier);
 }

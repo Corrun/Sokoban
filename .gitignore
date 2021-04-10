@@ -2,9 +2,9 @@
 # ----------
 # List of files to exclude from commits automatically
 
-# Ignore build/ directory and subfolders/files
-[Bb]uild/
 # Exclude IDE user settings folder
 .vscode/
-# Exclude high scores
-niveau/score_[0-9]*
+# Ignore build/ directory and subfolders/files
+[Bb]uild/
+#Ignore local scores
+[Ll]eaderboards/

@@ -15,7 +15,7 @@ int main(void) {
         switch (afficher_menu_principal()) {
           case MAINMENU_PLAY:;
             int numero_niveau = choix_du_niveau();
-            jouer(numero_niveau);
+            jouer_niveau(numero_niveau);
             break;
           case MAINMENU_RULES:;
             afficher_regles();
@@ -27,7 +27,9 @@ int main(void) {
             afficher_liste_niveau_scoreboard(); // Cette fonction permetterai de lister les fichiers niveau/niveau_%d (menu deroulant si possible)
             break;
           case MAINMENU_QUIT:
-            state = STATE_QUIT;
+            if (afficher_menu_quitter() == 0) {
+              state = STATE_QUIT;
+            }
             break;
         }
 

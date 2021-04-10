@@ -86,49 +86,26 @@ void afficher_liste_niveau_scoreboard(){
 	box(fenetre, 0, 0); // bordure de la fenêtre
 
 	int choix = choix_du_niveau();
-
-	
-
-
+	char* chemin_scoreboard[100];
+	sprintf(chemin_scoreboard, "./scoreboard/scoreboard_%d", choix);
+/*
+	FILE* fichier_scoreboard = fopen(chemin_scoreboard, "r");
+	//fscanf(fichier, "%d %d", &colonne, &ligne); // On lit la taille du niveau dans le fichier
+	if(fichier_scoreboard == NULL){
+		char* titre[100];
+		sprintf(titre, "LeaderBoard Du Niveau %i", choix);
+		menu_message(titre, "Ce niveau ne possède aucun score !", 40, 8, COLOR_WHITE, COLOR_WHITE);
+	}
+*/
 	mvwprintw(fenetre, 0, 2, "LeaderBoard Du Niveau %i ", choix);
 	mvwprintw(fenetre, 1, 2, "coucou");
+	mvwprintw(fenetre,13, 1,"Pour retourner au menu, appuyer sur Q.");
 	
 	do
 	{
 		input = wgetch(fenetre);
 	} while (input != 'q');
 }
-
-/*void instruction_menu() {
-    int leave;
-    switch (instruction){
-    case 1: //Jouer
-        
-        break;
-    case 2: //Règles
-        do{
-            system("clear");
-            afficher_regles();
-            leave = scanf("%d",&leave);
-        }while(leave == 'q' && leave == 'Q');
-        break;        
-
-     case 3: //Crédits
-        do{
-            system("clear");
-            afficher_credits();
-            leave = scanf("%d",&leave);
-        }while(leave == 'q' && leave == 'Q');
-        break;
-    
-     case 4: //Quitter
-        printf("todo");
-        break;
-
-    default:
-        return;
-    }
-}*/
 
 int afficher_menu_principal() {
     char* entries[5];
@@ -138,7 +115,15 @@ int afficher_menu_principal() {
 	entries[3] = "Leaderboards";
 	entries[4] = "Quitter";
 
-	return menu_liste(17, 48, "Sokoban", entries, 5);
+	return menu_liste(15, 52, "Sokoban", entries, 5);
+}
+
+int afficher_menu_quitter() {
+    char* entries[2];
+	entries[0] = "Oui";
+	entries[1] = "Non";
+
+	return menu_liste(9, 20, "Quitter ?", entries, 2);
 }
 
 // Affiche un menu composé d'une liste d'éléments
@@ -170,11 +155,11 @@ int menu_liste(int hauteur, int largeur, char* titre, char** elements, int nb_el
             if (selection == num_element) {
 				wattron(fenetre, A_STANDOUT);
 				wattron(fenetre, COLOR_PAIR(COLOR_RED));
-				mvwprintw(fenetre,  5 + (2 * num_element), 6, " ");
+				mvwprintw(fenetre,  3 + (2 * num_element), 5, " ");
 				wattroff(fenetre, COLOR_PAIR(COLOR_RED));
 			}
 
-			mvwprintw(fenetre,  5 + (2 * num_element), 8, elements[num_element]);
+			mvwprintw(fenetre,  3 + (2 * num_element), 7, elements[num_element]);
 
 			wattroff(fenetre, A_STANDOUT);
 		}
@@ -202,11 +187,7 @@ int menu_liste(int hauteur, int largeur, char* titre, char** elements, int nb_el
 }
 
 int menu_saisie_nombre(char* titre) {
-	int largeur_fenetre = strlen(titre);
-	if (largeur_fenetre < 9) {
-		largeur_fenetre = 9;
-	}
-	largeur_fenetre += 10;
+	int largeur_fenetre = max(strlen(titre), 9) + 10;
 
 	int yMax, xMax; // Console size in chars
 
@@ -268,11 +249,7 @@ int menu_saisie_nombre(char* titre) {
 }
 
 char* menu_saisie_texte(char* titre, int longueur_chaine_max) {
-	int largeur_fenetre = strlen(titre);
-	if (largeur_fenetre < longueur_chaine_max) {
-		largeur_fenetre = longueur_chaine_max;
-	}
-	largeur_fenetre += 10;
+	int largeur_fenetre = max(strlen(titre), longueur_chaine_max) + 10;
 
 	int yMax, xMax; // Console size in chars
 
@@ -337,4 +314,38 @@ char* menu_saisie_texte(char* titre, int longueur_chaine_max) {
 	
         return NULL;
     }
+}
+
+void menu_message (char* titre, char* message, int largeur, int hauteur, int couleur, int couleur_texte) {
+	int yMax, xMax; // Taille de la console en caractères
+	
+	WINDOW* fenetre = nouvelle_fenetre(); // Nouvelle fenêtre
+	WINDOW* zone_texte = derwin(fenetre, hauteur, largeur, 2, 2);
+
+	do {
+		getmaxyx(stdscr, yMax, xMax); // Lecture de la taille de la console
+
+		centrer_fenetre(fenetre, hauteur + 4, largeur + 4, yMax, xMax, 0, 0);
+		
+		effacer_ecran();
+
+		wattron(fenetre, COLOR_PAIR(couleur));
+		wclear(fenetre);
+		box(fenetre, 0, 0);
+		
+		wattron(fenetre, A_STANDOUT);
+		mvwprintw(fenetre, 0, 2, titre);
+		wattroff(fenetre, A_STANDOUT);
+		wattroff(fenetre, COLOR_PAIR(couleur));
+		
+		
+		wattron(zone_texte, COLOR_PAIR(couleur_texte));
+		mvwprintw(zone_texte, 0, 0, message);
+		wattroff(zone_texte, COLOR_PAIR(couleur_texte));
+
+		wattroff(fenetre, couleur);
+	} while (wgetch(fenetre) != KB_ENTER);
+
+	delwin(zone_texte);
+	delwin(fenetre);
 }
