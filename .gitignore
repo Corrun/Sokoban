@@ -7,5 +7,5 @@
 # Ignore build/ directory and subfolders/files
 [Bb]uild/
 # Ignore local scores
-#[Nn]iveau/score_[0-9]*
-#[Nn]iveau/score_multi_[0-9]*
+[Nn]iveau/score_[0-9]*
+[Nn]iveau/score_multi_[0-9]*
