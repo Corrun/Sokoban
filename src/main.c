@@ -4,8 +4,9 @@ int main(void) {
   /*liste_score_t* scores = lire_liste_scores(0);
   
   return 0;*/
-  //afficher_logo();
-  //sleep(5);
+  system("clear");
+  afficher_logo();
+  sleep(3);
 
   initialiser_ncurses();
   

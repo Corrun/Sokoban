@@ -45,9 +45,6 @@ Utilisation de Ncurses pour la partie "graphique"
 
 [![Foo](./img/logouniv.png)](https://www.univ-lille.fr/)
 
-![Image du menu des score de BanSoko](./img/logouniv.png)
-
-
 <br>
 <br>
 <br>

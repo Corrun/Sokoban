@@ -22,13 +22,13 @@ int choix_du_niveau(void) {
 
 void afficher_regles(void) {
 	char regles_entiere[1000];
-	sprintf(regles_entiere, "Règles classiques de Sokoban :\nLe joueur doit placer toutes les caisses (%c)\nsur toutes les cibles (%c)\nMais attention !\nUn joueur est trop faible pour pousser 2 caisses a la fois ...\nOu même les tirer !\n\nPour quitter, appuyez sur ENTREE", DISPLAY_TILE_CRATE, DISPLAY_TILE_TARGET);
+	sprintf(regles_entiere, "Règles classiques du Bansoko :\nLe joueur doit placer toutes les caisses (%c)\nsur toutes les cibles (%c)\nMais attention !\nUn joueur est trop faible pour pousser 2 caisses a la fois ...\nOu même les tirer !\n\nPour quitter, appuyez sur ENTREE", DISPLAY_TILE_CRATE, DISPLAY_TILE_TARGET);
 	menu_message("Regles : ", regles_entiere, 50, 9, COLOR_GREEN, COLOR_WHITE);
 }
 
 void afficher_credits(void) {
 	char credits_entier[1000];
-	sprintf(credits_entier, "Un grand merci et bravo aux contributeurs\ndu projets\nJe cite :\nALMEIDA Néo\nROUX Hugo\nVANOORENBERGHE Amaury\nEt aux librairies natives\nEt à la superbe librairie Ncurses !\n\nPour quitter, appuyez sur ENTREE\n");
+	sprintf(credits_entier, "Un grand merci et bravo aux contributeurs\ndu projets\nJe cite :\n  ALMEIDA Néo\n  ROUX Hugo\n  VANOORENBERGHE Amaury\nEt aux librairies natives\nEt à la superbe librairie Ncurses !\n\nPour quitter, appuyez sur ENTREE\n");
 	menu_message("Credits : ", credits_entier, 50, 10, COLOR_BLUE, COLOR_WHITE);
 }
 
@@ -126,7 +126,7 @@ int afficher_menu_principal(void) {
 	entries[4] = "Leaderboards";
 	entries[5] = "Quitter";
 
-	return menu_liste(17, 52, "Sokoban", entries, 6);
+	return menu_liste(17, 52, "Bansoko", entries, 6);
 }
 
 int afficher_menu_quitter(void) {

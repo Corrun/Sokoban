@@ -45,7 +45,7 @@ void jouer_niveau(int numero_niveau) {
 		}
 	}
 
-	int nb_pas = etats_niveaux->taille - 2;
+	int nb_pas = etats_niveaux->taille - 1;
 	
 	if (nb_pas < meilleur_score || meilleur_score < 0) {
 		ecriture_du_score(numero_niveau, nb_pas);
