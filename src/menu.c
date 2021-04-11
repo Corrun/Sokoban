@@ -3,7 +3,7 @@
 // Affiche le niveau de manière (très) brut.
 void afficher_logo(void){
    printf(
-	   "                                      ▄▄                           \n"
+	   "                                       ▄▄                          \n"
 	   "  ▄█▀▀▀█▄█        ▀███                ▄██                          \n"
 	   "▄██    ▀█          ██                 ██                           \n"
 	   "▀███▄     ▄██▀██▄  ██  ▄██▀  ▄██▀██▄  ██▄████▄  ▄█▀██▄ ▀████████▄  \n"
@@ -20,20 +20,22 @@ int choix_du_niveau(void) {
     return menu_saisie_nombre("Choisis un niveau");
 }
 
-// FIXME Refaire les règles ? (nouvelle_fenetre)
-void afficher_regles(void){
-	effacer_ecran();
+void afficher_regles(void) {
 	char regles_entiere[1000];
-	sprintf(regles_entiere, "Règles classiques de Sokoban :\nLe joueur doit placer toutes les caisses (%c)\nsur toutes les cibles (%c)\nMais attention !\nUn joueur est trop faible pour pousser 2 caisses a la fois ...\nOu même les tirer !\n\nPour retourner au menu, appuyer sur entrée.", DISPLAY_TILE_CRATE, DISPLAY_TILE_TARGET);
+	sprintf(regles_entiere, "Règles classiques de Sokoban :\nLe joueur doit placer toutes les caisses (%c)\nsur toutes les cibles (%c)\nMais attention !\nUn joueur est trop faible pour pousser 2 caisses a la fois ...\nOu même les tirer !\n\nPour quitter, appuyez sur ENTREE", DISPLAY_TILE_CRATE, DISPLAY_TILE_TARGET);
 	menu_message("Regles : ", regles_entiere, 50, 9, COLOR_GREEN, COLOR_WHITE);
 }
 
-// FIXME Refaire les credits ? (nouvelle_fenetre)
 void afficher_credits(void) {
-	effacer_ecran();
 	char credits_entier[1000];
-	sprintf(credits_entier, "Un grand merci et bravo aux contributeurs\ndu projets\nJe cite :\nALMEIDA Néo\nROUX Hugo\nVANOORENBERGHE Amaury\nEt aux librairies natives\nEt à la superbe librairie Ncurses !\n\nPour retourner au menu, appuyer sur entrée.\n");
+	sprintf(credits_entier, "Un grand merci et bravo aux contributeurs\ndu projets\nJe cite :\nALMEIDA Néo\nROUX Hugo\nVANOORENBERGHE Amaury\nEt aux librairies natives\nEt à la superbe librairie Ncurses !\n\nPour quitter, appuyez sur ENTREE\n");
 	menu_message("Credits : ", credits_entier, 50, 10, COLOR_GREEN, COLOR_WHITE);
+}
+
+void afficher_controles(void) {
+	char controles[1000];
+	sprintf(controles, "Se deplacer: fleches / ZQSD\nAnnuler deplacement: %c\nRecommencer: %c\nQuitter: %c\n\nPour quitter, appuyez sur ENTREE", CANCEL, RESTART, LEAVE);
+	menu_message("Controles : ", controles, 50, 6, COLOR_MAGENTA, COLOR_WHITE);
 }
 
 void afficher_liste_niveau_scoreboard(int numero_niveau) {
@@ -104,6 +106,10 @@ void afficher_liste_niveau_scoreboard(int numero_niveau) {
 			mvwprintw(zone_texte, 2, 0, "Aucun score disponible");
 			wattroff(zone_texte, A_DIM);
 		}
+
+		wattron(fenetre, A_DIM);
+		mvwprintw(fenetre, 10, 4, "Pour quitter, appuyer sur ENTREE");
+		wattroff(fenetre, A_DIM);	
 	} while (wgetch(fenetre) != KB_ENTER);
 
 	if (scores) {

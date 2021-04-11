@@ -28,21 +28,38 @@ void liberation_du_niveau (niveau_t* niveau) {
 	free(niveau);
 }
 
+// Affiche un niveau et renvoie la saisie de l'utilisateur
 char affichage_niveau_ncurses (niveau_t* niveau, int numero_niveau) {
   int yMax, xMax; // Taille de la console en caractères
 	
+  int meilleur_score = lecture_du_score(numero_niveau);
+  char info[100];
+
+  int largeur = 0;
+
 	WINDOW* fenetre = nouvelle_fenetre(); // Nouvelle fenêtre
+  
+  int saisie = '\0';
 
   while (true) {
     getmaxyx(stdscr, yMax, xMax); // Lire la taille de la console
 		
-		// Centrer la fenêtre
-		centrer_fenetre(fenetre, niveau->lignes + 3, niveau->colonnes + 2, yMax, xMax, 0, 0);  
+    if (meilleur_score >= 0) {
+      sprintf(info, "Niveau %i | Record: %i coups | %i coups", numero_niveau, meilleur_score, etats_niveaux->taille - 1);
+    } else {
+      sprintf(info, "Niveau %i | Record: aucun | %i coups", numero_niveau, etats_niveaux->taille - 1);
+    }
+		largeur = 2 + max(niveau->colonnes, strlen(info));
+    
+    // Centrer la fenêtre
+		centrer_fenetre(fenetre, niveau->lignes + 2, largeur + 2, yMax, xMax, 0, 0);  
 
 		effacer_ecran(); // Efface l'ecran
 		
-		wclear(fenetre); // Raffraichi la fenêtre
+		//wclear(fenetre); // Raffraichi la fenêtre
 		box(fenetre, 0, 0); // Bordure de la fenêtre
+
+    int decalage = (largeur - niveau->colonnes) / 2;
 
     for (int ligne = 0; ligne < niveau->lignes; ++ligne) {
       for (int colonne = 0; colonne < niveau->colonnes; ++colonne) {
@@ -53,7 +70,7 @@ char affichage_niveau_ncurses (niveau_t* niveau, int numero_niveau) {
 
         wattron(fenetre, attribut);
         
-        mvwaddch(fenetre, ligne + 1, colonne + 1, case_affichee);
+        mvwaddch(fenetre, ligne + 1, colonne + 1 + decalage, case_affichee);
         wattroff(fenetre, attribut);
         wrefresh(fenetre);
       }
@@ -61,16 +78,13 @@ char affichage_niveau_ncurses (niveau_t* niveau, int numero_niveau) {
     
     //sprintf("Coups %c", niveau->nb_de_pas);
     wattron(fenetre, A_STANDOUT);
-    mvwprintw(fenetre, 0, 1, "Niveau: %i", numero_niveau); // Titre de la fenetre (à changer pour afficher le niveau actuel)
-    char nb_coups[100];
-    sprintf(nb_coups, "Coups: %d", etats_niveaux->taille - 1);
-    
-    mvwprintw(fenetre, niveau->lignes+1, niveau->colonnes + 1 - strlen(nb_coups), nb_coups);
+    mvwprintw(fenetre, 0, 2, info); // Titre de la fenetre (à changer pour afficher le niveau actuel)
 
     //mvwprintw(fenetre, niveau->lignes+1, niveau->colonnes-5, nb_coups); // Nombre de pas (actuellement à 0 vu que c'est l'initialisation du niveau)
     wattroff(fenetre, A_STANDOUT);
+    mvwprintw(fenetre, niveau->lignes + 1, 2, "[ F1 ou h : Afficher controles ]");
 
-    int saisie = majuscule_en_minuscule(wgetch(fenetre));
+    saisie = majuscule_en_minuscule(wgetch(fenetre));
 
     //int saisie = wgetch(fenetre);
     switch (saisie) {
@@ -89,7 +103,10 @@ char affichage_niveau_ncurses (niveau_t* niveau, int numero_niveau) {
       case LEAVE:
       case RESTART:
       case CANCEL:
+      case HELP:
         return (char)saisie;
+      case KB_F1:
+        return HELP;
     }
   }
 }

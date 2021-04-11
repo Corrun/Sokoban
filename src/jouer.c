@@ -7,8 +7,6 @@ void jouer_niveau(int numero_niveau) {
 	DEBUT_JEU:;
 
 	etats_niveaux = nouvelle_liste_niveaux (10);
-
-	bool gagne = false;
 	
 	niveau_t* niveau = lecture_du_niveau(numero_niveau);
 	if (!niveau) return;
@@ -21,20 +19,23 @@ void jouer_niveau(int numero_niveau) {
 	ajouter_niveau (etats_niveaux, niveau);
 	
 	int saisie = 0;
-	while (!gagne) {
+	while (nombre_de_caisse_restante_sur_terrain(haut_de_liste(etats_niveaux)) > 0) {
 		niveau = haut_de_liste(etats_niveaux);
 		saisie = affichage_niveau_ncurses(niveau, numero_niveau);
-		gagne = nombre_de_caisse_restante_sur_terrain(niveau) == 0;
 		
 		switch (saisie) {
 			case LEAVE:
-				// FIXME: Foutre un msg de confirmation ??
-				goto FIN_JEU;
+				if (afficher_menu_quitter() == 1) {
+					goto FIN_JEU;
+				}
 			case RESTART:
 				while (etats_niveaux->taille > 0) {
 					enlever_dernier_niveau(etats_niveaux);
 				}
 				goto DEBUT_JEU;
+			case HELP:
+				afficher_controles();
+				break;
 			case CANCEL:
 				annuler_deplacement();
 				break;
@@ -53,6 +54,11 @@ void jouer_niveau(int numero_niveau) {
 	if (inserable_dans_liste(scores, nb_pas)) {
 		inserer_score_dans_liste(scores, nb_pas, nom_du_joueur());
 		enregistrer_liste_scores(scores, numero_niveau);
+		afficher_liste_niveau_scoreboard(numero_niveau);
+	} else {
+		char message[50];
+		sprintf(message, "Bravo, vous avez termine le niveau %i!", numero_niveau);
+		menu_message("Niveau fini", message, 40, 1, COLOR_GREEN, COLOR_WHITE);
 	}
 	
 	FIN_JEU:;

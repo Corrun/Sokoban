@@ -1,4 +1,4 @@
-# Sokoban
+# BanSoko
 - Commencé le : 18/03/2021
 - Fin le : 12/04/2021
 
@@ -8,7 +8,7 @@ Vous pouvez tester le jeu sur navigateur vous même, en passant par ce **[lien](
 
 ## Règles du jeu :
 Les règles du jeu sont simples !
-Vous incarnez un personnage qui se doit de ranger chaque niveau !
+Vous incarnez un personnage qui se doit de ranger chaque niveau !  
 Et pour ranger ces niveaux... Il suffit de pousser les caisses sur leurs emplacements ..
 Mais attention !
 Il lui est impossible de :
@@ -19,6 +19,8 @@ Il lui est impossible de :
 - Se téléporter
 - Finir le jeu <img align="center" style="float: left; margin: 0 10px 0 0;" src="https://i.imgur.com/KAqRB7y.png" height=3% width=3%/>
 
+</br>
+
 ## Installation :
 Il suffit de télécharger le code, où de cloner le git avec ce lien :
 ```
@@ -28,8 +30,9 @@ Vous pouvez ensuite utiliser la commande `make` pour compiler, et lancer l'execu
 Ou sinon, utiliser la commande `make run` qui permet de compiler et d'executer le programme en "même temps"  
 
 ## Image du jeu fini !
-[![GIF du menu de BanSoko](https://imgur.com/g50Mi4g)] [![Image du menu des score de BanSoko](https://imgur.com/GBwQa6j )]
-[![Résolution du niveau 1 de BanSoko]( )] 
+![GIF du menu de BanSoko](./img/sokobangif1.gif)</br>
+![Image du menu des score de BanSoko](./img/sokobanpic1.png)
+
 
 ## Collaborateurs du projet :  
 Nous remercions nos collaborateurs :</br>
@@ -40,8 +43,10 @@ Nous remercions nos collaborateurs :</br>
 Librairie utilisée :  
 Utilisation de Ncurses pour la partie "graphique"  
 
-<br>
-<img align="left" style="float: center; margin: 0 10px 0 0;" src="https://upload.wikimedia.org/wikipedia/en/thumb/1/15/University_of_Lille_%28logo%29.svg/220px-University_of_Lille_%28logo%29.svg.png"/>(https://www.univ-lille.fr/)
+[![Foo](./img/logouniv.png)](https://www.univ-lille.fr/)
+
+![Image du menu des score de BanSoko](./img/logouniv.png)
+
 
 <br>
 <br>

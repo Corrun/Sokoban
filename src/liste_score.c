@@ -8,6 +8,7 @@ score_t* nouveau_score(void) {
 // FIXME
 void initialiser_score(score_t* score, int points, char* nom) {
 	score->score = points;
+	memset(score->nom, '\0', 10);
 	strncpy(score->nom, nom, 9);
 }
 

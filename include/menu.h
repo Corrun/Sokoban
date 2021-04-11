@@ -1,20 +1,21 @@
 #ifndef MENU_H_
 #define MENU_H_
 
-void afficher_logo ();
+void afficher_logo (void);
 
-int choix_du_niveau ();
+int choix_du_niveau (void);
 
-void afficher_regles ();
+void afficher_regles (void);
 
-void afficher_credits ();
+void afficher_credits (void);
+
+void afficher_controles (void);
 
 void instruction_menu (int instruction);
 
+int afficher_menu_principal (void);
 
-int afficher_menu_principal ();
-
-int afficher_menu_quitter ();
+int afficher_menu_quitter (void);
 
 void afficher_liste_niveau_scoreboard (int numero_niveau);
 

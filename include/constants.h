@@ -34,6 +34,7 @@
 #define RESTART 'r'
 #define LEAVE 'l'
 #define CANCEL 'a'
+#define HELP 'h'
 
 #define KB_ENTER 10
 #define KB_DOWN 258
@@ -41,6 +42,7 @@
 #define KB_LEFT 260
 #define KB_RIGHT 261
 #define KB_BACKSPACE 263
+#define KB_F1 265
 
 #define STATE_QUIT 0
 #define STATE_MAINMENU 1
