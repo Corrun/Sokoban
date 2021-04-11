@@ -1,113 +1,115 @@
 #include "main.h"
 
 // Affiche le niveau de manière (très) brut.
-void afficher_logo(){
-   printf("\n                                      ▄▄                           \n ▄█▀▀▀█▄█        ▀███                ▄██                           \n▄██    ▀█          ██                 ██                           \n▀███▄     ▄██▀██▄  ██  ▄██▀  ▄██▀██▄  ██▄████▄  ▄█▀██▄ ▀████████▄  \n  ▀█████▄██▀   ▀██ ██ ▄█    ██▀   ▀██ ██    ▀████   ██   ██    ██  \n▄     ▀████     ██ ██▄██    ██     ██ ██     ██ ▄█████   ██    ██  \n██     ████▄   ▄██ ██ ▀██▄  ██▄   ▄██ ██▄   ▄████   ██   ██    ██  \n█▀█████▀  ▀█████▀▄████▄ ██▄▄ ▀█████▀  █▀█████▀ ▀████▀██▄████  ████▄\n"); 
+void afficher_logo(void){
+   printf(
+	   "                                      ▄▄                           \n"
+	   "  ▄█▀▀▀█▄█        ▀███                ▄██                          \n"
+	   "▄██    ▀█          ██                 ██                           \n"
+	   "▀███▄     ▄██▀██▄  ██  ▄██▀  ▄██▀██▄  ██▄████▄  ▄█▀██▄ ▀████████▄  \n"
+	   "  ▀█████▄██▀   ▀██ ██ ▄█    ██▀   ▀██ ██    ▀████   ██   ██    ██  \n"
+	   "▄     ▀████     ██ ██▄██    ██     ██ ██     ██ ▄█████   ██    ██  \n"
+	   "██     ████▄   ▄██ ██ ▀██▄  ██▄   ▄██ ██▄   ▄████   ██   ██    ██  \n"
+	   "█▀█████▀  ▀█████▀▄████▄ ██▄▄ ▀█████▀  █▀█████▀ ▀████▀██▄████  ████▄\n");  // 1017 chars > 552 symboles uniques
 }
 
-// Permet de demander à l'utilisateur un int, pour ensuite choisir le niveau
-int choix_du_niveau() {
+// Permet de demander à l'utilisateur un entier, pour ensuite choisir le niveau
+int choix_du_niveau(void) {
     return menu_saisie_nombre("Choisis un niveau");
 }
 
-void afficher_regles(){
-	int yMax, xMax; // Taille de la console en caractères
+// FIXME Refaire les règles ? (nouvelle_fenetre)
+void afficher_regles(void){
 	effacer_ecran();
-	int input = '\0';
-
-	WINDOW* fenetre = nouvelle_fenetre();
-
-	getmaxyx(stdscr, yMax, xMax); // Lire la taille de la console
-		
-	// Centrer la fenêtre
-	centrer_fenetre(fenetre, 15 , 48 , yMax, xMax, 0, 0);  
-	
-	wclear(fenetre); // Raffraichi la fenêtre
-	box(fenetre, 0, 0); // bordure de la fenêtre
-
-	mvwprintw(fenetre, 0, 2, "Regles : ");
-	mvwprintw(fenetre, 1, 1,"Règles classiques de Sokoban :");
-	mvwprintw(fenetre, 2, 1,"Le joueur doit placer toutes les caisses (%c)", DISPLAY_TILE_CRATE);
-	mvwprintw(fenetre, 3, 1,"sur toutes les cibles (%c)", DISPLAY_TILE_TARGET);
-	mvwprintw(fenetre, 4, 1,"Mais attention !");
-	mvwprintw(fenetre, 5, 1,"Un joueur est trop faible pour pousser");
-	mvwprintw(fenetre, 6, 1,"2 caisses ... Ou même les tirer !");
-	mvwprintw(fenetre,13, 1,"Pour retourner au menu, appuyer sur Q.");
-	do
-	{
-		input = wgetch(fenetre);
-	} while (input != 'q');
+	char regles_entiere[1000];
+	sprintf(regles_entiere, "Règles classiques de Sokoban :\nLe joueur doit placer toutes les caisses (%c)\nsur toutes les cibles (%c)\nMais attention !\nUn joueur est trop faible pour pousser 2 caisses a la fois ...\nOu même les tirer !\n\nPour retourner au menu, appuyer sur entrée.", DISPLAY_TILE_CRATE, DISPLAY_TILE_TARGET);
+	menu_message("Regles : ", regles_entiere, 50, 9, COLOR_GREEN, COLOR_WHITE);
 }
 
-void afficher_credits(){
-	int yMax, xMax; // Taille de la console en caractères
+// FIXME Refaire les credits ? (nouvelle_fenetre)
+void afficher_credits(void) {
 	effacer_ecran();
-	int input = '\0';
-
-	WINDOW* fenetre = nouvelle_fenetre();
-
-	getmaxyx(stdscr, yMax, xMax); // Lire la taille de la console
-		
-	// Centrer la fenêtre
-	centrer_fenetre(fenetre, 15 , 48 , yMax, xMax, 0, 0);  
-	
-	wclear(fenetre); // Raffraichi la fenêtre
-	box(fenetre, 0, 0); // bordure de la fenêtre
-
-	mvwprintw(fenetre, 0, 2, "Credits : ");
-	mvwprintw(fenetre, 1, 2, "Un grand merci et bravo aux contributeurs");
-	mvwprintw(fenetre, 2, 2, "du projets");
-	mvwprintw(fenetre, 3, 2, "Je cite :");
-	mvwprintw(fenetre, 4, 2, "ALMEIDA Néo");
-	mvwprintw(fenetre, 5, 2, "ROUX Hugo");
-	mvwprintw(fenetre, 6, 2, "VANOORENBERGHE Amaury");
-	mvwprintw(fenetre, 8, 2, "Et aux librairies natives");
-	mvwprintw(fenetre, 9, 2, "Et à la superbe librairie Ncurses !");
-	mvwprintw(fenetre,13, 1,"Pour retourner au menu, appuyer sur Q.");
-	do
-	{
-		input = wgetch(fenetre);
-	} while (input != 'q');
+	char credits_entier[1000];
+	sprintf(credits_entier, "Un grand merci et bravo aux contributeurs\ndu projets\nJe cite :\nALMEIDA Néo\nROUX Hugo\nVANOORENBERGHE Amaury\nEt aux librairies natives\nEt à la superbe librairie Ncurses !\n\nPour retourner au menu, appuyer sur Q.\n");
+	menu_message("Credits : ", credits_entier, 50, 10, COLOR_GREEN, COLOR_WHITE);
 }
 
-void afficher_liste_niveau_scoreboard(){
-	int yMax, xMax; // Taille de la console en caractères
-	effacer_ecran();
-	int input = '\0';
+void afficher_liste_niveau_scoreboard(int numero_niveau) {
+	FILE* fichier;
+	char nom_fichier[100];
 
-	WINDOW* fenetre = nouvelle_fenetre();
-
-	getmaxyx(stdscr, yMax, xMax); // Lire la taille de la console
-		
-	// Centrer la fenêtre
-	centrer_fenetre(fenetre, 15 , 48 , yMax, xMax, 0, 0);  
-	
-	wclear(fenetre); // Raffraichi la fenêtre
-	box(fenetre, 0, 0); // bordure de la fenêtre
-
-	int choix = choix_du_niveau();
-	char* chemin_scoreboard[100];
-	sprintf(chemin_scoreboard, "./scoreboard/scoreboard_%d", choix);
-/*
-	FILE* fichier_scoreboard = fopen(chemin_scoreboard, "r");
-	//fscanf(fichier, "%d %d", &colonne, &ligne); // On lit la taille du niveau dans le fichier
-	if(fichier_scoreboard == NULL){
-		char* titre[100];
-		sprintf(titre, "LeaderBoard Du Niveau %i", choix);
-		menu_message(titre, "Ce niveau ne possède aucun score !", 40, 8, COLOR_WHITE, COLOR_WHITE);
+	sprintf(nom_fichier, "./niveau/niveau_%d", numero_niveau);
+	fichier = fopen(nom_fichier, "r");
+	if (!fichier) {
+		menu_message("Erreur", "Le niveau specifie n'existe pas", 32, 1, COLOR_RED, COLOR_WHITE);
+		return;
 	}
-*/
-	mvwprintw(fenetre, 0, 2, "LeaderBoard Du Niveau %i ", choix);
-	mvwprintw(fenetre, 1, 2, "coucou");
-	mvwprintw(fenetre,13, 1,"Pour retourner au menu, appuyer sur Q.");
+	fclose(fichier);
+
+	int yMax, xMax; // Taille de la console en caractères
 	
-	do
-	{
-		input = wgetch(fenetre);
-	} while (input != 'q');
+	char titre[100];
+	sprintf(titre, "Niveau %d - Meilleurs scores", numero_niveau);
+	int largeur = max(40, strlen(titre));
+
+	const int marge = 8;
+
+	WINDOW* fenetre = nouvelle_fenetre();
+	WINDOW* zone_texte = derwin(fenetre, SCORE_BUFFER_SIZE + 2, largeur, 2, marge / 2);
+
+	liste_score_t* scores = lire_liste_scores(numero_niveau);
+
+	do {
+		getmaxyx(stdscr, yMax, xMax); // Lire la taille de la console
+		
+		effacer_ecran();
+	
+		centrer_fenetre(fenetre, 12, largeur + marge, yMax, xMax, 0, 0);
+
+		wrefresh(fenetre);
+
+		wattron(fenetre, COLOR_PAIR(COLOR_CYAN));
+		box(fenetre, 0, 0);
+		wattron(fenetre, A_STANDOUT);
+		mvwprintw(fenetre, 0, 2, titre);
+		wattroff(fenetre, A_STANDOUT);
+		wattroff(fenetre, COLOR_PAIR(COLOR_CYAN));
+
+		if (scores) {
+			wattron(zone_texte, A_BOLD);
+			mvwprintw(zone_texte, 0, 0, "Nom");
+			mvwprintw(zone_texte, 0, largeur - 5, "Score");
+			wattroff(zone_texte, A_BOLD);
+			
+			char texte[20];
+			score_t* score;
+			for (int i = 0; i < scores->taille; ++i) {
+				score = scores->memoire[i];
+
+				if (i == 0) {
+					wattron(zone_texte, COLOR_PAIR(COLOR_YELLOW));
+				}
+
+				mvwprintw(zone_texte, 2 + i, 0, score->nom);
+
+				sprintf(texte, "%d coups", score->score);
+				mvwprintw(zone_texte, 2 + i, largeur - strlen(texte), texte);
+
+				wattroff(zone_texte, COLOR_PAIR(COLOR_YELLOW));
+			}
+		} else {
+			wattron(zone_texte, A_DIM);
+			mvwprintw(zone_texte, 2, 0, "Aucun score disponible");
+			wattroff(zone_texte, A_DIM);
+		}
+	} while (wgetch(fenetre) != KB_ENTER);
+
+	if (scores) {
+		liberer_liste_scores(scores);
+	}
 }
 
-int afficher_menu_principal() {
+int afficher_menu_principal(void) {
     char* entries[5];
 	entries[0] = "Jouer";
 	entries[1] = "Règles";
@@ -118,10 +120,10 @@ int afficher_menu_principal() {
 	return menu_liste(15, 52, "Sokoban", entries, 5);
 }
 
-int afficher_menu_quitter() {
+int afficher_menu_quitter(void) {
     char* entries[2];
-	entries[0] = "Oui";
-	entries[1] = "Non";
+	entries[0] = "Non";
+	entries[1] = "Oui";
 
 	return menu_liste(9, 20, "Quitter ?", entries, 2);
 }

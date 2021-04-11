@@ -51,4 +51,6 @@
 #define MAINMENU_SCOREBOARD 3
 #define MAINMENU_QUIT 4
 
+#define SCORE_BUFFER_SIZE 5
+
 #endif // CONSTANTS_H_

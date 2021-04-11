@@ -16,7 +16,7 @@ int afficher_menu_principal ();
 
 int afficher_menu_quitter ();
 
-void afficher_liste_niveau_scoreboard ();
+void afficher_liste_niveau_scoreboard (int numero_niveau);
 
 int menu_liste (int hauteur, int largeur, char* titre, char** elements, int nb_elements);
 

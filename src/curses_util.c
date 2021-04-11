@@ -1,7 +1,7 @@
 #include "main.h"
 
 // Démarrer le mode graphique de Ncurses
-void initialiser_ncurses() {
+void initialiser_ncurses(void) {
 	initscr(); // Initialisation de Ncurses
 	noecho(); // Ne pas écrire ce que l'utilisateur écrit
 	curs_set(false); // Cacher le curseur
@@ -23,7 +23,7 @@ void initialiser_ncurses() {
 }
 
 // Désinitialisation de Ncurses
-void fermer_ncurses() {
+void fermer_ncurses(void) {
 	endwin(); // Fermer toutes les fenêtres de ncurses
 }
 
@@ -50,14 +50,14 @@ void centrer_fenetre(WINDOW* fenetre, int hauteur_cible, int largeur_cible, int 
 }
 
 // Créée une nouvelle fenêtre de taille 0
-WINDOW* nouvelle_fenetre() {
+WINDOW* nouvelle_fenetre(void) {
 	WINDOW* fenetre = newwin(0, 0, 0, 0); // Nouvelle fenêtre de taille et position 0
 	keypad(fenetre, true); // Ne pas attendre l'appui sur entrer pour recevoir la saisie
 	return fenetre;
 }
 
 // Efface l'écran et l'actualise
-void effacer_ecran() {
+void effacer_ecran(void) {
 	erase(); 
 	refresh();
 }

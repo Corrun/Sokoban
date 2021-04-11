@@ -15,6 +15,7 @@
 #include "niveau.h"
 #include "terrain.h"
 #include "liste_niveaux.h"
+#include "liste_score.h"
 #include "curses_util.h"
 #include "niveau_util.h"
 #include "menu.h"

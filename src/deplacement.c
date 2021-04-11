@@ -67,8 +67,8 @@ void deplacement (niveau_t* n, char direction){
   free(deux_en_avant);
 }
 
-//Annule le dernier déplacement
-void annuler_deplacement ()
+// Annule le dernier déplacement et reviens a la dernière position
+void annuler_deplacement (void)
 {
   if (etats_niveaux->taille > 1) enlever_dernier_niveau (etats_niveaux);
 }

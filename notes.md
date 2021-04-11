@@ -22,3 +22,41 @@ menu.h > instruction_menu()
     Fonction déplacée dans main ?
 menu.h > menu_saisie_texte()
     Cassée ?????
+
+
+
+
+struct score
+    int points
+    char* username
+
+
+
+file format:
+```
+3
+17 bertrand
+
+
+
+```
+
+
+
+
+
+
+
+
+score_multi_n
+
+3
+47 foo
+54 bar
+67 hello_sailor
+
+
+
+
+Faire menu message qui lit depuis un fichier
+Faire menu scoreboard
