@@ -8,7 +8,7 @@ SOURCE=src
 INCLUDE=include
 LDFLAGS=-lncurses
 
-build: clean $(SOURCE)/* $(INCLUDE)/*
+build: $(SOURCE)/* $(INCLUDE)/*
 	mkdir -p $(BUILD_DIR)
 	$(CC) $(CFLAGS) -I$(INCLUDE) -o $(OUTPUT) src/*.c $(LDFLAGS)
 

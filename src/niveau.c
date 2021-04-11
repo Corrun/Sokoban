@@ -148,6 +148,9 @@ int modification_affichage_niveau (niveau_t* niveau, int x, int y, char* symbole
     case TILE_PLAYER_ON_TARGET:
       *symbole = DISPLAY_TILE_PLAYER_ON_TARGET;
       return A_BOLD | COLOR_PAIR(COLOR_GREEN);
+    default:
+      *symbole = case_terrain;
+      break;
   }
 
   return 0;
@@ -232,7 +235,7 @@ niveau_t* lecture_du_niveau (int numero_niveau){
 
     // Si le caractère n'est pas un retour à la ligne
     if (car != '\r' && car != '\n'){
-      // On place le caractère lu sur le terrain puis on incrépente
+      // On place le caractère lu sur le terrain puis on incrémente
       // l'adresse/l'indice d'écriture
       place_sur_terrain(niveau, colonne, ligne, car);
       analyser_case_niveau(niveau, indice_terrain);
@@ -251,7 +254,22 @@ niveau_t* lecture_du_niveau (int numero_niveau){
     return NULL;
   }
 
+  if (nombre_de_caisse_restante_sur_terrain(niveau) != nombre_cible_sur_terrain(niveau)) {
+    menu_message("Erreur de validation", "Le niveau ne contient pas assez de cibles (.)\nPour pouvoir placer toutes les caisses ($)", 48, 2, COLOR_YELLOW, COLOR_WHITE);
+    return NULL;
+  }
+
   return niveau;
+}
+
+int nombre_cible_sur_terrain(niveau_t* niveau){
+  int nombre_de_cibles = 0;
+  for(int indiceTerrain = 0; indiceTerrain < niveau->colonnes * niveau->lignes;indiceTerrain++){
+      if(niveau->terrain[indiceTerrain] == TILE_TARGET){
+        nombre_de_cibles++;
+      }
+    }
+  return nombre_de_cibles;
 }
 
 // Analyse la case à un indice donné et modifie les propriétés de niveau en conséquences

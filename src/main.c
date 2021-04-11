@@ -5,8 +5,8 @@ int main(void) {
   
   return 0;*/
   system("clear");
-  afficher_logo();
-  sleep(3);
+  //afficher_logo();
+//  sleep(3);
 
   initialiser_ncurses();
   
@@ -46,5 +46,6 @@ int main(void) {
   }
 
   fermer_ncurses();
+  system("clear");
   return 0;
 }

@@ -1,4 +1,8 @@
-# BanSoko
+# Projet m2101 - BanSoko
+> Projet réalisé par
+[ALMEIDA Néo](https://github.com/Ninhache), 
+[ROUX Hugo](https://github.com/Yugogo-git) et 
+[VANOORENBERGHE Amaury](https://github.com/REHERC)
 - Commencé le : 18/03/2021
 - Fin le : 12/04/2021
 
@@ -17,8 +21,7 @@ Il lui est impossible de :
 - Pousser trois caisses
 - Casser les murs 
 - Se téléporter
-- Finir le jeu <img align="center" style="float: left; margin: 0 10px 0 0;" src="https://i.imgur.com/KAqRB7y.png" height=3% width=3%/>
-
+- Finir le jeu <span><img align="center" style="float: left; margin: 0 10px 0 0;" src="https://i.imgur.com/KAqRB7y.png" height=3% width=3%/></span>
 </br>
 
 ## Installation :
@@ -27,24 +30,23 @@ Il suffit de télécharger le code, où de cloner le git avec ce lien :
 https://github.com/Yugogo-git/Sokoban.git
 ```
 Vous pouvez ensuite utiliser la commande `make` pour compiler, et lancer l'executable créer  
-Ou sinon, utiliser la commande `make run` qui permet de compiler et d'executer le programme en "même temps"  
+Ou sinon, utilisez la commande `make run` qui permet de compiler et d'executer le programme en "même temps"
 
-## Image du jeu fini !
+> **ATTENTION !**
+
+Ce projet utilise la librairie NCurses, pour pouvoir compiler le programme, il est nécessaire d'installer les dépendances. Pour les utilisateurs du gestionnaire de packetages apt, vous pouvez installer les dependances avec `sudo make install-dev-with-apt`
+
+## Images du jeu fini !
 ![GIF du menu de BanSoko](./img/sokobangif1.gif)</br>
 ![Image du menu des score de BanSoko](./img/sokobanpic1.png)
+![Image du menu des score de BanSoko](./img/sokobanpic2.png)
+![Image du menu des règles de BanSoko](./img/sokobanpic3.png)
+![Image d'un niveau de BanSoko](./img/sokobanpic4.png)
 
 
-## Collaborateurs du projet :  
-Nous remercions nos collaborateurs :</br>
-[ALMEIDA Néo](https://github.com/Ninhache)</br>
-[ROUX Hugo](https://github.com/Yugogo-git)</br>
-[VANOORENBERGHE Amaury](https://github.com/REHERC)</br>
-<br>
-Librairie utilisée :  
+## Librairies utilisées
+
+Librairies standard
 Utilisation de Ncurses pour la partie "graphique"  
 
-[![Foo](./img/logouniv.png)](https://www.univ-lille.fr/)
-
-<br>
-<br>
-<br>
+[![Université LILLE](./img/logouniv.png)](https://www.univ-lille.fr/)
