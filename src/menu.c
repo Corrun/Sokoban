@@ -11,6 +11,8 @@ void afficher_logo(void){
 	   "▄     ▀████     ██ ██▄██    ██     ██ ██     ██ ▄█████   ██    ██  \n"
 	   "██     ████▄   ▄██ ██ ▀██▄  ██▄   ▄██ ██▄   ▄████   ██   ██    ██  \n"
 	   "█▀█████▀  ▀█████▀▄████▄ ██▄▄ ▀█████▀  █▀█████▀ ▀████▀██▄████  ████▄\n");  // 1017 chars > 552 symboles uniques
+
+	   
 }
 
 // Permet de demander à l'utilisateur un entier, pour ensuite choisir le niveau
@@ -313,9 +315,9 @@ char* menu_saisie_texte(char* titre, int longueur_chaine_max) {
 
 				break;
 		}
-	
-        return NULL;
     }
+    
+	return NULL;
 }
 
 void menu_message (char* titre, char* message, int largeur, int hauteur, int couleur, int couleur_texte) {

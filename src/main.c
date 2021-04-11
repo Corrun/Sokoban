@@ -4,7 +4,8 @@ int main(void) {
   /*liste_score_t* scores = lire_liste_scores(0);
   
   return 0;*/
-  
+  //afficher_logo();
+  //sleep(5);
   initialiser_ncurses();
   
   int numero_niveau;

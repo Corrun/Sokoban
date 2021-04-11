@@ -2,6 +2,8 @@
 
 // Permet de lancer un niveau, grâce a un numéro.
 void jouer_niveau(int numero_niveau) {
+	int meilleur_score = lecture_du_score(numero_niveau);
+	
 	DEBUT_JEU:;
 
 	etats_niveaux = nouvelle_liste_niveaux (10);
@@ -9,10 +11,13 @@ void jouer_niveau(int numero_niveau) {
 	bool gagne = false;
 	
 	niveau_t* niveau = lecture_du_niveau(numero_niveau);
-	liste_score_t* scores = lecture_du_score(numero_niveau);
-	
 	if (!niveau) return;
 
+	liste_score_t* scores = lire_liste_scores(numero_niveau);
+	if (!scores) {
+		scores = nouvelle_liste_scores();
+	}
+	
 	ajouter_niveau (etats_niveaux, niveau);
 	
 	int saisie = 0;
@@ -38,14 +43,20 @@ void jouer_niveau(int numero_niveau) {
 				break;
 		}
 	}
-	ecriture_du_score(numero_niveau, (etats_niveaux->taille) - 2);
+
+	int nb_pas = etats_niveaux->taille - 2;
+
+	if (meilleur_score >= 0 && nb_pas < meilleur_score) {
+		ecriture_du_score(numero_niveau, nb_pas);
+	}
+
+	if (inserable_dans_liste(scores, nb_pas)) {
+		inserer_score_dans_liste(scores, nb_pas, nom_du_joueur());
+		enregistrer_liste_scores(scores, numero_niveau);
+	}
 	FIN_JEU:;
 
-	// Gestion du score
-
-	// erreur de provenance inconnu
-	// ajoute 2 au score quand ajouté dans le leaderboard
-	//ecriture_du_score(numero_niveau, (etats_niveaux->taille) - 2);
+	liberer_liste_scores(scores);
 
 	while (etats_niveaux->taille > 0) {
 		enlever_dernier_niveau(etats_niveaux);

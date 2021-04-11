@@ -16,7 +16,7 @@ void liberer_score(score_t* score) {
 	free(score);	
 }
 
-// 
+// Créée une nouvelle liste de scores
 liste_score_t* nouvelle_liste_scores(void) {
 	liste_score_t* scores = malloc(sizeof(liste_score_t));
 
