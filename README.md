@@ -27,10 +27,9 @@ https://github.com/Yugogo-git/Sokoban.git
 Vous pouvez ensuite utiliser la commande `make` pour compiler, et lancer l'executable créer  
 Ou sinon, utiliser la commande `make run` qui permet de compiler et d'executer le programme en "même temps"  
 
-## Image du jeu .. Qui n'est pas fini !
-
-<img align="center" style="float: left; margin: 0 10px 0 0;" src="https://i.imgur.com/HSXXKde.png" height=20% width=20%/> <img align="center" style="float: center; margin: 0 10px 0 0;" src="https://i.imgur.com/HSXXKde.png" height=20% width=20%/></br>
-<img align="center" style="float: left; margin: 0 10px 0 0;" src="https://i.imgur.com/HSXXKde.png" height=30% width=30%/>
+## Image du jeu fini !
+[![GIF du menu de BanSoko](https://imgur.com/g50Mi4g)] [![Image du menu des score de BanSoko](https://imgur.com/GBwQa6j )]
+[![Résolution du niveau 1 de BanSoko]( )] 
 
 ## Collaborateurs du projet :  
 Nous remercions nos collaborateurs :</br>

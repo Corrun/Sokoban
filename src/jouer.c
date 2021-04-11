@@ -14,7 +14,7 @@ void jouer_niveau(int numero_niveau) {
 	if (!niveau) return;
 
 	liste_score_t* scores = lire_liste_scores(numero_niveau);
-	if (!scores) {
+	if (scores == NULL) {
 		scores = nouvelle_liste_scores();
 	}
 	
@@ -45,8 +45,8 @@ void jouer_niveau(int numero_niveau) {
 	}
 
 	int nb_pas = etats_niveaux->taille - 2;
-
-	if (meilleur_score >= 0 && nb_pas < meilleur_score) {
+	
+	if (nb_pas < meilleur_score || meilleur_score < 0) {
 		ecriture_du_score(numero_niveau, nb_pas);
 	}
 
@@ -54,6 +54,7 @@ void jouer_niveau(int numero_niveau) {
 		inserer_score_dans_liste(scores, nb_pas, nom_du_joueur());
 		enregistrer_liste_scores(scores, numero_niveau);
 	}
+	
 	FIN_JEU:;
 
 	liberer_liste_scores(scores);

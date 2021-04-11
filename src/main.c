@@ -6,6 +6,7 @@ int main(void) {
   return 0;*/
   //afficher_logo();
   //sleep(5);
+
   initialiser_ncurses();
   
   int numero_niveau;

@@ -8,7 +8,7 @@ score_t* nouveau_score(void) {
 // FIXME
 void initialiser_score(score_t* score, int points, char* nom) {
 	score->score = points;
-	strncpy (score->nom, nom, 9);
+	strncpy(score->nom, nom, 9);
 }
 
 // Libérer la totalité des scores
@@ -20,10 +20,11 @@ void liberer_score(score_t* score) {
 liste_score_t* nouvelle_liste_scores(void) {
 	liste_score_t* scores = malloc(sizeof(liste_score_t));
 
-	scores->memoire = calloc(SCORE_BUFFER_SIZE, sizeof(score_t*));
+	scores->memoire = malloc(SCORE_BUFFER_SIZE * sizeof(score_t*));
 	
 	for (int i = 0; i < SCORE_BUFFER_SIZE; ++i) {
 		scores->memoire[i] = nouveau_score();
+		initialiser_score(scores->memoire[i], 0, "");
 	}
 
 	scores->taille = 0;
@@ -48,11 +49,7 @@ liste_score_t* lire_liste_scores (int numero_niveau) {
 
 	if (!fichier) return NULL;
 
-	printf("lire_liste_scores::1\n");
-
 	liste_score_t* liste_score = nouvelle_liste_scores();
-	
-	printf("lire_liste_scores::2\n");
 
 
     int nombre_scores;
@@ -60,13 +57,8 @@ liste_score_t* lire_liste_scores (int numero_niveau) {
     
 	liste_score->taille = min(nombre_scores, SCORE_BUFFER_SIZE);
 
-	printf("lire_liste_scores::3\n");
-
     for (int numero_score = 0; numero_score < nombre_scores; numero_score++) {
-		printf("lire_liste_scores::4.1\n");
 		fscanf(fichier, "%d %s", &(liste_score->memoire[numero_score]->score), liste_score->memoire[numero_score]->nom);
-		printf("lire_liste_scores::4.2\n");
-
     }
 
     return liste_score;
@@ -98,7 +90,7 @@ void enregistrer_liste_scores (liste_score_t* scores, int numero_niveau) {
 // le nombre de points passé en paramètre est un nouveau high score dans la liste
 // ou si il reste au moins un emplacement libre dans la liste
 bool inserable_dans_liste (liste_score_t* scores, int points) {
-	return points < scores->memoire[scores->taille - 1]->score || scores->taille < SCORE_BUFFER_SIZE;
+	return scores->taille == 0 || points < scores->memoire[scores->taille - 1]->score || scores->taille < SCORE_BUFFER_SIZE;
 }
 
 // Insère le score défini par points/nom dans la liste scores
@@ -125,6 +117,8 @@ void inserer_score_dans_liste (liste_score_t* scores, int points, char* nom) {
 			return;
 		}
 	}
+	initialiser_score(scores->memoire[scores->taille - 1], points, nom);
+	trier_liste_score(scores);
 }
 
 // Trie les scores de la liste par ordre croissant

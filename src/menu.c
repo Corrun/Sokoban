@@ -32,7 +32,7 @@ void afficher_regles(void){
 void afficher_credits(void) {
 	effacer_ecran();
 	char credits_entier[1000];
-	sprintf(credits_entier, "Un grand merci et bravo aux contributeurs\ndu projets\nJe cite :\nALMEIDA Néo\nROUX Hugo\nVANOORENBERGHE Amaury\nEt aux librairies natives\nEt à la superbe librairie Ncurses !\n\nPour retourner au menu, appuyer sur Q.\n");
+	sprintf(credits_entier, "Un grand merci et bravo aux contributeurs\ndu projets\nJe cite :\nALMEIDA Néo\nROUX Hugo\nVANOORENBERGHE Amaury\nEt aux librairies natives\nEt à la superbe librairie Ncurses !\n\nPour retourner au menu, appuyer sur entrée.\n");
 	menu_message("Credits : ", credits_entier, 50, 10, COLOR_GREEN, COLOR_WHITE);
 }
 
@@ -261,7 +261,8 @@ char* menu_saisie_texte(char* titre, int longueur_chaine_max) {
 
 	//char input_text[string_max_size] = { '\0' };
 	char* texte_saisi = malloc(longueur_chaine_max * sizeof(char));
-	texte_saisi[0] = '\0';
+	memset(texte_saisi, '\0', longueur_chaine_max * sizeof(char));
+	//texte_saisi[0] = '\0';
 
 	int longueur_saisie = 0;
 

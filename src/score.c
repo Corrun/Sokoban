@@ -19,6 +19,7 @@ int lecture_du_score(int quel_niveau) {
 
 		return score;
 	} else {
+		ecriture_du_score(quel_niveau, -1);
 		// Erreur de lecture (le fichier n'existe pas ?)
 		return -1; // Retour d'une valeur d'erreur
 	}
