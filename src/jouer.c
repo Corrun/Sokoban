@@ -1,6 +1,7 @@
 #include "main.h"
 
-void jouer_niveau (int numero_niveau) {
+// Permet de lancer un niveau, grâce a un numéro.
+void jouer_niveau(int numero_niveau) {
 	DEBUT_JEU:;
 
 	etats_niveaux = nouvelle_liste_niveaux (10);
@@ -8,7 +9,8 @@ void jouer_niveau (int numero_niveau) {
 	bool gagne = false;
 	
 	niveau_t* niveau = lecture_du_niveau(numero_niveau);
-
+	liste_score_t* scores = lecture_du_score(numero_niveau);
+	
 	if (!niveau) return;
 
 	ajouter_niveau (etats_niveaux, niveau);
@@ -21,7 +23,7 @@ void jouer_niveau (int numero_niveau) {
 		
 		switch (saisie) {
 			case LEAVE:
-				//Foutre un msg de confirmation ??
+				// FIXME: Foutre un msg de confirmation ??
 				goto FIN_JEU;
 			case RESTART:
 				while (etats_niveaux->taille > 0) {
