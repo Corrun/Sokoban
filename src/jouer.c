@@ -39,6 +39,7 @@ void jouer_niveau(int numero_niveau) {
 				if (afficher_menu_quitter() == 1) { // Permet d'afficher un menu de confirmation avant de quitter
 					goto FIN_JEU; // Si on entre dans le if, on est redirigé à la fin de la boucle. et on apparait au menu principale
 				}
+				break;
 			case RESTART:
 				if (afficher_menu_recommencer() == 1){ // Permet d'afficher un menu de confirmation avant de recommencer
 					while (etats_niveaux->taille > 0) { // Permet libérer la totalité du tableau de niveau.

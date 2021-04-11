@@ -21,7 +21,7 @@ run: build ./$(OUTPUT)
 debug:
 	$(CC) -g -I$(INCLUDE) -o $(OUTPUT) src/*.c $(LDFLAGS)
 
-rund: debug ./$(OUTPUT) #Need to install valgrind
+rund: debug ./$(OUTPUT) # Need to install valgrind
 	valgrind -s $(OUTPUT)
 
 # Install required packages using apt (development env)
