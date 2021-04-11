@@ -9,19 +9,21 @@ char affichage_niveau_ncurses (niveau_t* niveau, int numero_niveau);
 
 int modification_affichage_niveau (niveau_t* niveau, int x, int y, char* symbole);
 
-void affichage_niveau (niveau_t* niveau);
+void affichage_niveau(niveau_t* niveau);
 
-niveau_t* lecture_du_niveau (int quel_niveau);
+niveau_t* lecture_du_niveau(int quel_niveau);
 
-void analyser_case_niveau (niveau_t* niveau, int indice);
+int nombre_cible_sur_terrain(niveau_t* niveau);
 
-bool case_libre_sur_terrain (niveau_t* niveau, int colonne, int ligne);
+void analyser_case_niveau(niveau_t* niveau, int indice);
 
-bool caisse_sur_terrain (niveau_t* niveau, int colonne, int ligne);
+bool case_libre_sur_terrain(niveau_t* niveau, int colonne, int ligne);
 
-int nombre_de_caisse_restante_sur_terrain (niveau_t* niveau);
+bool caisse_sur_terrain(niveau_t* niveau, int colonne, int ligne);
 
-niveau_t* copier_niveau (niveau_t *source);
+int nombre_de_caisse_restante_sur_terrain(niveau_t* niveau);
+
+niveau_t* copier_niveau(niveau_t *source);
 
 #endif // NIVEAU_H_
 
