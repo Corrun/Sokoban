@@ -2,7 +2,8 @@
 
 // Affiche le niveau de manière (très) brut.
 void afficher_logo(void){
-   printf(
+	system("clear");
+	printf(
 	   "  ▄▄                                                                \n"
 	   " ▄██                            ▄█▀▀▀█▄█        ▀███                \n"
 	   " ██                            ▄██    ▀█          ██                \n"
