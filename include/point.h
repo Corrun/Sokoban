@@ -1,7 +1,8 @@
 #ifndef POINT_H_
 #define POINT_H_
 
-char entree_du_joueur(void); // FIXME: Déplacer dans un fichier séparé (cf: input.h)
+//Fonction inutilisée mais demandée, voir fonction : "affichage_niveau_ncurses()"
+//char entree_du_joueur(void);
 
 point_t* nouveau_point(int colonne, int ligne);
 

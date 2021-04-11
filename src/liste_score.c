@@ -5,19 +5,19 @@ score_t* nouveau_score(void) {
 	return malloc(sizeof(score_t));
 }
 
-// FIXME
+// Permet d'affecter les valeurs passées en paramètres à une instance de score_t déjà allouée
 void initialiser_score(score_t* score, int points, char* nom) {
 	score->score = points;
 	memset(score->nom, '\0', 10);
 	strncpy(score->nom, nom, 9);
 }
 
-// Libérer la totalité des scores
+// Permet de libérer la  mémoire d'une instance score_t
 void liberer_score(score_t* score) {
 	free(score);	
 }
 
-// Créée une nouvelle liste de scores
+// Permet de créer une nouvelle liste de scores
 liste_score_t* nouvelle_liste_scores(void) {
 	liste_score_t* scores = malloc(sizeof(liste_score_t));
 
@@ -33,6 +33,7 @@ liste_score_t* nouvelle_liste_scores(void) {
 	return scores;
 }
 
+// Permet de libérer la mémoire de la liste de score
 void liberer_liste_scores (liste_score_t* scores) {
 	for (int i = 0; i < SCORE_BUFFER_SIZE; ++i) {
 		liberer_score(scores->memoire[i]);
@@ -42,6 +43,7 @@ void liberer_liste_scores (liste_score_t* scores) {
 	free(scores);
 }
 
+// Permet de lire la liste scores du niveau correspondant à "numero_niveau"
 liste_score_t* lire_liste_scores (int numero_niveau) {
     char chemin_du_fichier[100];
     sprintf(chemin_du_fichier, "./niveau/score_multi_%d", numero_niveau);
@@ -65,7 +67,7 @@ liste_score_t* lire_liste_scores (int numero_niveau) {
     return liste_score;
 }
 
-// Enregistre une liste de scores dans un fichier niveau/score_multi_<nb>
+// Permet d'enregistrer une liste de scores dans un fichier niveau/score_multi_<nb>
 // Où nb est numero_niveau
 void enregistrer_liste_scores (liste_score_t* scores, int numero_niveau) {
 	char nom_fichier[100];
@@ -94,7 +96,7 @@ bool inserable_dans_liste (liste_score_t* scores, int points) {
 	return scores->taille == 0 || points < scores->memoire[scores->taille - 1]->score || scores->taille < SCORE_BUFFER_SIZE;
 }
 
-// Insère le score défini par points/nom dans la liste scores
+// Permet d'insèrer le score défini par points/nom dans la liste scores
 // L'insertion n'a lieu que si le score est meilleur que le dernier
 // Si un score pour le joueur nom existe déjà, on le met à jour à la place
 void inserer_score_dans_liste (liste_score_t* scores, int points, char* nom) {
@@ -122,7 +124,7 @@ void inserer_score_dans_liste (liste_score_t* scores, int points, char* nom) {
 	trier_liste_score(scores);
 }
 
-// Trie les scores de la liste par ordre croissant
+// Permet de trie les scores de la liste par ordre croissant
 void trier_liste_score (liste_score_t* scores) {
 	score_t** tab = scores->memoire;
 	score_t* tmp;	

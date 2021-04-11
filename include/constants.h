@@ -27,22 +27,22 @@
 #define DISPLAY_TILE_PLAYER 'M'
 #define DISPLAY_TILE_PLAYER_ON_TARGET '+'
 
-#define DIR_UP 'z'
-#define DIR_LEFT 'q'
-#define DIR_DOWN 's'
-#define DIR_RIGHT 'd'
-#define RESTART 'r'
-#define LEAVE 'l'
-#define CANCEL 'a'
-#define HELP 'h'
-
-#define KB_ENTER 10
-#define KB_DOWN 258
-#define KB_UP 259
-#define KB_LEFT 260
-#define KB_RIGHT 261
-#define KB_BACKSPACE 263
-#define KB_F1 265
+#define DIR_UP 'z' // Touche permettant de se déplacer vers le haut
+#define DIR_LEFT 'q' // Touche permettant de se déplacer vers la gauche
+#define DIR_DOWN 's' // Touche permettant de se déplacer vers le bas
+#define DIR_RIGHT 'd' // Touche permettant de se déplacer vers la droite
+#define RESTART 'r' // Touche permettant de simuler la touche R, pendant un niveau, elle sert à recommencer le niveau
+#define LEAVE 'l' // Touche permettant de simuler la touche L, pendant un niveau, elle sert à quitter le niveau
+#define CANCEL 'a' // Touche permettant de simuler la touche A , pendant un niveau, elle sert à effectuer un retour arrière (annuler_deplacement)
+#define HELP 'h' // Touche permettant de simuler la touche H, pendant un niveau, elle sert à afficher l'aide
+ 
+#define KB_ENTER 10 // Touche permettant de simuler la touche entrée
+#define KB_DOWN 258 // Touche permettant de se déplacer vers le bas
+#define KB_UP 259 // Touche permettant de se déplacer vers le haut
+#define KB_LEFT 260 // Touche permettant de se déplacer vers la gauche
+#define KB_RIGHT 261 // Touche permettant de se déplacer vers la droite
+#define KB_BACKSPACE 263 // Touche permettant de simuler la touche supprimer, pendant une demande de saisie, elle permet de supprimer du texte
+#define KB_F1 265 // Touche permettant de simuler la touche fonction 1 (F1), pendant un niveau, elle sert à afficher l'aide
 
 #define STATE_QUIT 0
 #define STATE_MAINMENU 1

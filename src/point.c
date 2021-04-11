@@ -1,5 +1,6 @@
 #include "main.h"
 
+/* Fonction inutilisée mais demandée, voir fonction : "affichage_niveau_ncurses()"
 char entree_du_joueur (void){
   int var;
   do
@@ -9,9 +10,9 @@ char entree_du_joueur (void){
   } while (var != DIR_UP && var != DIR_LEFT && var != DIR_DOWN && var != DIR_RIGHT && var != LEAVE);
   printf("%c\n",var);
   return var;
-}
+}*/
 
-// Créée une instance d'un point avec les coordonnées spécifiées et renvoie un pointeur vers son adresse 
+// Créer une instance d'un point avec les coordonnées spécifiées et renvoie un pointeur vers son adresse 
 point_t* nouveau_point (int colonne, int ligne){
   // On alloue de la mémoire pour stocker un point
   point_t* point = malloc(sizeof(point_t));
@@ -28,7 +29,7 @@ point_t* trouver_perso (niveau_t* niveau){
   int index = 0; // Indice de parcours dans le tableau terrain du niveau
 
   // Tant que la case n'est pas un joueur et que l'indice est dans le tableau
-  while (index < taille_tableau_terrain(niveau) && niveau->terrain[index] != TILE_PLAYER){
+  while (index < taille_tableau_terrain(niveau) && niveau->terrain[index] != TILE_PLAYER) {
     ++index; // Incrémenter l'indice de parcours
   }
 

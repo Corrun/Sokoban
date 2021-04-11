@@ -1,7 +1,7 @@
 #include "main.h"
 
-// Lecture du meilleur score depuis le fichier score_n 
-// Où n est le numéro d'un niveau
+// Lecture du meilleur score depuis le fichier score_nb 
+// Où nb est le numéro d'un niveau
 int lecture_du_score(int quel_niveau) {
 	FILE* fichier;
 

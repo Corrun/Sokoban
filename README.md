@@ -7,13 +7,13 @@
 - Fin le : 12/04/2021
 
 ## Explications :  
-Dans le cadre d'un projet scolaire, nous devions recréer le jeu [Sokoban](https://fr.wikipedia.org/wiki/Sokoban), un jeu de réfléxion et de puzzle qui nous vient tous droit du Japon !
-Vous pouvez tester le jeu sur navigateur vous même, en passant par ce **[lien](https://sokoban.info/)**
+Dans le cadre d'un projet universitaire, nous avons recréer le jeu [Sokoban](https://fr.wikipedia.org/wiki/Sokoban), un jeu de réfléxion et de puzzle qui nous vient tous droit du Japon !
+Vous pouvez tester le jeu sur navigateur vous-mêmes, en passant par ce **[lien](https://sokoban.info/)**
 
 ## Règles du jeu :
 Les règles du jeu sont simples !
-Vous incarnez un personnage qui se doit de ranger chaque niveau !  
-Et pour ranger ces niveaux... Il suffit de pousser les caisses sur leurs emplacements ..
+Vous incarnez un personnage qui se doit de ranger des caisses !  
+Et pour ranger ces caisses... Il suffit de les pousser sur les emplacements correspondant.
 Mais attention !
 Il lui est impossible de :
 - Tirer une caisse
@@ -29,7 +29,7 @@ Il suffit de télécharger le code, où de cloner le git avec ce lien :
 ```
 https://github.com/Yugogo-git/Sokoban.git
 ```
-Vous pouvez ensuite utiliser la commande `make` pour compiler, et lancer l'executable créer  
+Vous pouvez ensuite utiliser la commande `make` pour compiler, et lancer l'executable créer, qui se situe dans le dossier build.  
 Ou sinon, utilisez la commande `make run` qui permet de compiler et d'executer le programme en "même temps"
 
 > **ATTENTION !**
@@ -46,7 +46,7 @@ Ce projet utilise la librairie NCurses, pour pouvoir compiler le programme, il e
 
 ## Librairies utilisées
 
-Librairies standard
+Librairies standard  
 Utilisation de Ncurses pour la partie "graphique"  
 
 [![Université LILLE](./img/logouniv.png)](https://www.univ-lille.fr/)

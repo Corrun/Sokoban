@@ -1,5 +1,7 @@
 #include "main.h"
 
+/*
+// Fonction qui permet de simuler une lecture de niveau, elle n'est pas utilisée
 void initialise_terrain(niveau_t* niveau){
   // On parcours les indices du terrain pour placer des murs sur chaque case
   for (int indice = 0; indice < taille_tableau_terrain(niveau); ++indice) {
@@ -7,13 +9,14 @@ void initialise_terrain(niveau_t* niveau){
     niveau->terrain[indice] = TILE_WALL;
   }
 }
+*/
 
 // Modifie une case du terrain du niveau passé en paramètre et la remplace par car
 void place_sur_terrain (niveau_t* niveau, int colonne, int ligne, char car) {
 	// On calcule l'indice de la case à modifier
 	int indice = coordonnees_vers_indice_terrain(niveau, colonne, ligne);
 
-	// On remplace la valeur par car
+	// On remplace la valeur par le char, passé en paramètre
 	niveau->terrain[indice] = car;
 }
 
