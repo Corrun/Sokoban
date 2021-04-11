@@ -23,6 +23,9 @@ int main(void) {
           case MAINMENU_RULES:;
             afficher_regles();
             break;
+          case MAINMENU_CONTROLS:;
+            afficher_controles();
+            break;
           case MAINMENU_CREDITS:;
             afficher_credits();
             break;

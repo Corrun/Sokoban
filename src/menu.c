@@ -29,7 +29,7 @@ void afficher_regles(void) {
 void afficher_credits(void) {
 	char credits_entier[1000];
 	sprintf(credits_entier, "Un grand merci et bravo aux contributeurs\ndu projets\nJe cite :\nALMEIDA Néo\nROUX Hugo\nVANOORENBERGHE Amaury\nEt aux librairies natives\nEt à la superbe librairie Ncurses !\n\nPour quitter, appuyez sur ENTREE\n");
-	menu_message("Credits : ", credits_entier, 50, 10, COLOR_GREEN, COLOR_WHITE);
+	menu_message("Credits : ", credits_entier, 50, 10, COLOR_BLUE, COLOR_WHITE);
 }
 
 void afficher_controles(void) {
@@ -118,14 +118,15 @@ void afficher_liste_niveau_scoreboard(int numero_niveau) {
 }
 
 int afficher_menu_principal(void) {
-    char* entries[5];
+    char* entries[6];
 	entries[0] = "Jouer";
 	entries[1] = "Règles";
-	entries[2] = "Credits";
-	entries[3] = "Leaderboards";
-	entries[4] = "Quitter";
+	entries[2] = "Controles";
+	entries[3] = "Credits";
+	entries[4] = "Leaderboards";
+	entries[5] = "Quitter";
 
-	return menu_liste(15, 52, "Sokoban", entries, 5);
+	return menu_liste(17, 52, "Sokoban", entries, 6);
 }
 
 int afficher_menu_quitter(void) {
